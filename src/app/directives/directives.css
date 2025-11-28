@@ -1,0 +1,11 @@
+.isGreen {
+    background-color: green;
+    color: white;
+}
+.isRed {
+    background-color: red;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    
+}

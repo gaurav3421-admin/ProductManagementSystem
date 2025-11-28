@@ -1,0 +1,190 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h5>Template Driven Form {{title| getStringLength }}</h5>
+    </div>
+    <div class="card-body p-2">
+        <div class="container-fulid mt-1">
+            <div class="card p-4 shadow">
+                <!-- Reference the form with #studentForm and bind to ngSubmit event -->
+                <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)" (reset)="onReset(studentForm)">
+
+                    <!-- Section 1: Student Basic Information -->
+                    <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Student Basic Information</h5>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="studentName" class="form-label">Full Name</label>
+                            <!-- Add name attribute, [(ngModel)], required, and validation reference #fullName -->
+                            <input type="text" class="form-control" id="studentName" placeholder="Enter full name"
+                                name="fullName " [(ngModel)]="studentData.fullName" required #fullName="ngModel">
+
+                            <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="text-danger">
+                                Name is required.
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label for="studentAge" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="studentAge" placeholder="Enter age" name="age"
+                                [(ngModel)]="studentData.age" required min="1" max="100" #age="ngModel">
+                            <div *ngIf="age.invalid && (age.dirty || age.touched)" class="text-danger">
+                                Age is required and must be between 1 and 100.
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select" id="gender" name="gender" [(ngModel)]="studentData.gender"
+                                required #gender="ngModel">
+                                <option value="" disabled>Choose...</option>
+                                <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+                            </select>
+                            <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="text-danger">
+                                Gender is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="example@college.com"
+                                name="email" [(ngModel)]="studentData.email" required email #email="ngModel">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                                A valid email is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter phone number"
+                                name="phone" [(ngModel)]="studentData.phone" required pattern="[0-9]{10}"
+                                #phone="ngModel">
+                            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="text-danger">
+                                A 10-digit phone number is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="2" placeholder="Enter complete address"
+                                name="address" [(ngModel)]="studentData.address" required #address="ngModel"></textarea>
+                            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-danger">
+                                Address is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Family Information -->
+                    <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Family Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="fatherName" class="form-label">Father’s Name</label>
+                            <input type="text" class="form-control" id="fatherName" placeholder="Enter father's name"
+                                name="fatherName" [(ngModel)]="studentData.fatherName" required #fatherName="ngModel">
+                            <div *ngIf="fatherName.invalid && (fatherName.dirty || fatherName.touched)"
+                                class="text-danger">
+                                Father's Name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="motherName" class="form-label">Mother’s Name</label>
+                            <input type="text" class="form-control" id="motherName" placeholder="Enter mother's name"
+                                name="motherName" [(ngModel)]="studentData.motherName" required #motherName="ngModel">
+                            <div *ngIf="motherName.invalid && (motherName.dirty || motherName.touched)"
+                                class="text-danger">
+                                Mother's Name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="parentContact" class="form-label">Parent Contact Number</label>
+                            <input type="tel" class="form-control" id="parentContact" placeholder="Enter contact number"
+                                name="parentContact" [(ngModel)]="studentData.parentContact" required
+                                pattern="[0-9]{10}" #parentContact="ngModel">
+                            <div *ngIf="parentContact.invalid && (parentContact.dirty || parentContact.touched)"
+                                class="text-danger">
+                                A 10-digit contact number is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="parentOccupation" class="form-label">Parent Occupation</label>
+                            <input type="text" class="form-control" id="parentOccupation" placeholder="Enter occupation"
+                                name="parentOccupation" [(ngModel)]="studentData.parentOccupation" required
+                                #parentOccupation="ngModel">
+                            <div *ngIf="parentOccupation.invalid && (parentOccupation.dirty || parentOccupation.touched)"
+                                class="text-danger">
+                                Occupation is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label for="familyAddress" class="form-label">Family Address</label>
+                            <textarea class="form-control" id="familyAddress" rows="2"
+                                placeholder="Enter family address" name="familyAddress"
+                                [(ngModel)]="studentData.familyAddress"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Course Details -->
+                    <h5 class="mb-3 text-primary border-bottom pb-2">3️⃣ Course Details</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="courseName" class="form-label">Course Name</label>
+                            <input type="text" class="form-control" id="courseName" placeholder="Enter course name"
+                                name="courseName" [(ngModel)]="studentData.courseName" required #courseName="ngModel">
+                            <div *ngIf="courseName.invalid && (courseName.dirty || courseName.touched)"
+                                class="text-danger">
+                                Course Name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="courseDuration" class="form-label">Duration (Years)</label>
+                            <input type="number" class="form-control" id="courseDuration" placeholder="e.g. 3"
+                                name="courseDuration" [(ngModel)]="studentData.courseDuration" required min="1"
+                                #courseDuration="ngModel">
+                            <div *ngIf="courseDuration.invalid && (courseDuration.dirty || courseDuration.touched)"
+                                class="text-danger">
+                                Duration is required and must be at least 1 year.
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="semester" class="form-label">Semester</label>
+                            <select class="form-select" id="semester" name="semester" [(ngModel)]="studentData.semester"
+                                required #semester="ngModel">
+                                <option value="" disabled>Choose...</option>
+                                <option *ngFor="let s of semesters" [value]="s">{{ s }}</option>
+                            </select>
+                            <div *ngIf="semester.invalid && (semester.dirty || semester.touched)" class="text-danger">
+                                Semester is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label for="specialization" class="form-label">Specialization</label>
+                            <input type="text" class="form-control" id="specialization"
+                                placeholder="Enter specialization (if any)" name="specialization"
+                                [(ngModel)]="studentData.specialization">
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="text-center">
+                        <!-- Disable submit button if the form is invalid -->
+                        <button type="submit" class="btn btn-success px-4 me-2"
+                            [disabled]="studentForm.invalid">Submit</button>
+                        <button type="reset" class="btn btn-secondary px-4">Reset</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

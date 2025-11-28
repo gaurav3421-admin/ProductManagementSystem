@@ -1,0 +1,185 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h5>Serach Product</h5>
+    </div>
+    <div class="card-body p-2">
+        <div class="container-fulid mt-1">
+            <div class="card p-4 shadow">
+                <form #searchProductForm="ngForm" (ngSubmit)="SearchProduct()" novalidate>
+                    <div class="row">
+                        <div class="col-md-1 mb-3">
+                            <label for="productName" class="form-label">Product Name</label>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <input type="text" class="form-control" name="searchText"  placeholder="Enter product name..."
+                                [(ngModel)]="searchText" required #productName="ngModel">
+                            <div *ngIf="searchProductForm.controls['productName']?.invalid 
+                                && (searchProductForm.controls['productName']?.touched || 
+                                searchProductForm.controls['productName']?.dirty)"
+                                class="text-danger mb-1 alert alert-danger p-1">Enter product name.
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <button class="btn btn-primary" [disabled]="searchProductForm.invalid || isLoading"
+                                type="submit">
+                                Search Product
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Loader -->
+                    <div *ngIf="isLoading" class="text-primary ">
+                        Searching...
+                    </div>
+                    <div class="card p-3 shadow-sm">
+
+                        <!-- Basic Information -->
+                        <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Basic Information</h5>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label ">Title</label>
+                                <input type="text" class="form-control" name="title"  [(ngModel)]="product.title">
+                            </div>
+
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label ">Brand</label>
+                                <input type="text" class="form-control" name="brand"  [(ngModel)]="product.brand">
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Description</label>
+                            <textarea class="form-control" rows="2" name="description"  [(ngModel)]="product.description"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label ">Category</label>
+                                <input type="text" class="form-control" [(ngModel)]="product.category" name="category" >
+                            </div>
+
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label ">SKU</label>
+                                <input type="text" class="form-control" [(ngModel)]="product.sku" name="sku" >
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Availability Status</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.availabilityStatus" name="availabilityStatus" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Return Policy</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.returnPolicy" name="returnPolicy" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Minimum Order Quantity</label>
+                            <input type="number" class="form-control" [(ngModel)]="product.minimumOrderQuantity" name="minimumOrderQuantity" >
+                        </div>
+
+                        <hr>
+
+                        <!-- Pricing -->
+                        <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Pricing</h5>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label ">Price</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.price" name="price">
+                            </div>
+
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label ">Discount (%)</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.discountPercentage" name="discountPercentage">
+                            </div>
+
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label ">Rating</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.rating" name="rating">
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Stock</label>
+                            <input type="number" class="form-control" [(ngModel)]="product.stock" name="stock">
+                        </div>
+
+                        <hr>
+
+                        <!-- Tags -->
+                        <h5 class="">Tags</h5>
+                        <input type="text" class="form-control mb-2" [(ngModel)]="product.tags"
+                            placeholder="Comma-separated tags" name="tags">
+
+                        <hr>
+
+                        <!-- Dimensions -->
+                        <h5 class="">Dimensions</h5>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label ">Weight</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.weight" name="weight">
+                            </div>
+
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label ">Width</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.dimensions.width" name="width">
+                            </div>
+
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label ">Height</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.dimensions.height" name="height">
+                            </div>
+
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label ">Depth</label>
+                                <input type="number" class="form-control" [(ngModel)]="product.dimensions.depth" name="depth">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Warranty & Shipping -->
+                        <h5 class="">Warranty & Shipping</h5>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Warranty Information</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.warrantyInformation" name="warrantyInformation">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Shipping Information</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.shippingInformation" name="shippingInformation">
+                        </div>
+
+                        <hr>
+
+                        <!-- Meta -->
+                        <h5 class="">Meta Information</h5>
+                        <div class="mb-2">
+                            <label class="form-label ">Created At</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.meta.createdAt" name="createdAt">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Updated At</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.meta.updatedAt" name="updatedAt">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label ">Barcode</label>
+                            <input type="text" class="form-control" [(ngModel)]="product.meta.barcode" name="barcode">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

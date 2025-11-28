@@ -1,0 +1,87 @@
+<div class="container-fluid p-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Angular-DataTypes</h3>
+        </div>
+        <div class="card-body p-4">
+
+            <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ DataTypes</h5>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                      {{_studentName}}-{{_studentAge}} -{{_isEnrolled}}
+                    </div>
+
+
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="studentName" class="form-label">Object</label>
+                        <p>ID: {{ student.id }}</p>
+                        <p>Name: {{ student.name }}</p>
+                        <p>Age: {{ student.age }}</p>
+                        <p>Course: {{ student.course }}</p>
+                    </div>
+                    <div class="col-md-3" style="width: auto; height: auto; overflow: auto;">
+                        <label for="studentName" class="form-label">Array</label>
+                        <ul>
+                            <li *ngFor="let s_Var of students">
+                                {{ s_Var }}
+                            </li>
+                            <li *ngFor="let markvar of marks" >
+                               Marks: {{markvar}}
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3" style="width: auto; height: auto; overflow: auto;">
+                        <label for="studentName" class="form-label">Typles</label>
+                        <h5>User Info</h5>
+                        <p>ID: {{ user[0] }}</p>
+                        <p>Name: {{ user[1] }}</p>
+                        <p>Last Name: {{ user[2] }}</p>
+
+                        <h5>Employee Info</h5>
+
+                        <p>ID: {{ employee[0] }}</p>
+                        <p>Name: {{ employee[1] }}</p>
+                        <p>Active: {{ employee[2] }}</p>
+
+
+                    </div>
+                    <div class="col-md-3" style="width: auto; height: auto; overflow: auto;">
+                        <label for="studentName" class="form-label">Array of Tuples</label>
+                        <h5>Student List</h5>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let s of students">
+                                    <td>{{ s[0] }}</td>
+                                    <td>{{ s[1] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+    </div>
+</div>
+<ul>

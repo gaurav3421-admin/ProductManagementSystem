@@ -1,0 +1,74 @@
+<div class="container-fluid p-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Angular-Pipes</h3>
+        </div>
+        <div class="card-body p-4">
+
+            <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Built-in Pipes </h5>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h2>Angular Pipes Example</h2>
+                        <p>Uppercase: {{ name | uppercase}}</p>
+                        <p>Lowercase: {{ name | lowercase }}</p>
+                        <p>Titlecase: {{ name | titlecase }}</p>
+                        <p>Full Date: {{ today | date:'fullDate' }}</p>
+                        <p>Short Date: {{ today | date:'short' }}</p>
+                        <p>Time: {{ today | date:'shortTime' }}</p>
+                        <p>Price in INR: {{ price | currency:'INR' }}</p>
+                        <p>Price in USD: {{ price | currency:'USD' }}</p>
+                        <p>Decimal: {{ price | number:'1.2-3' }}</p>
+                        <p>Percent: {{ percentValue | percent }}</p>
+                        <p>Slice (first 2 fruits): {{ fruits | slice:0:3 }}</p>
+                        <p>Student JSON: {{ student | json }}</p>
+                        <div *ngFor="let item of keyValueObject | keyvalue">
+                            {{ item.key }} : {{ item.value }}
+                        </div>
+                        <p>Async Data: {{ observableData | async }}</p>
+                        <p>{{ studentCount | i18nPlural: pluralMapping }}</p>
+                        <p>{{ gender | i18nSelect: genderMapping }}</p>
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Custom Pipe </h5>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="studentName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="studentName" placeholder="Enter full name" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="studentName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="studentName" placeholder="Enter full name" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="studentAge" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="studentAge" placeholder="Enter age" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select" id="gender" required>
+                            <option selected disabled value="">Choose...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-success px-4 me-2" type="buttton">Submit</button>
+                </div>
+
+            </form>
+
+
+
+
+        </div>
+
+    </div>
+</div>

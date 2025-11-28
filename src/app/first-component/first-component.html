@@ -1,0 +1,58 @@
+<p>first-component works!</p>
+<!-- src/app/app.component.html -->
+ {{_userName}}
+
+<!-- src/app/app.component.html -->
+
+<mat-toolbar color="primary">
+  <span>Employee Profile: </span>
+</mat-toolbar>
+
+<div class="employee-container">
+  <!-- Profile Summary Card -->
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <img mat-card-avatar src="path/to/avatar.jpg" alt="User Avatar">
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><mat-icon>email</mat-icon> </p>
+      <p><mat-icon>phone</mat-icon></p>
+      <p><mat-icon>location_on</mat-icon></p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary">Edit Profile</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Job Information Card -->
+  <mat-card class="info-card">
+    <mat-card-title>Job Information</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Department</mat-label>
+        <input matInput [value]="" readonly>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput [value]="" readonly>
+      </mat-form-field>
+      <!-- Add more job details as form fields -->
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Emergency Contact Card -->
+  <mat-card class="info-card">
+    <mat-card-title>Emergency Contact</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <p>Name:</p>
+      <p>Relationship:</p>
+      <p>Phone:</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+

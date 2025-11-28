@@ -1,13 +1,71 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>FirstAngularProject</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Start- Dashboard Theam -->
+  <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/fonts/phosphor/duotone/style.css">
+  <link rel="stylesheet" href="assets/fonts/tabler-icons.min.css">
+  <link rel="stylesheet" href="assets/fonts/feather.css">
+  <link rel="stylesheet" href="assets/fonts/fontawesome.css">
+  <link rel="stylesheet" href="assets/fonts/material.css">
+  <link rel="stylesheet" href="assets/css/style.css" id="main-style-link" />
+  <!-- End- Dashboard Theam -->
+
+
+  <!-- ...existing code... -->
+  <!-- Start- [Page Specific JS] -->
+  <!-- <script src="assets/js/plugins/apexcharts.min.js" defer></script>
+  <script src="assets/js/pages/dashboard-default.js" defer></script> -->
+
+  <script src="assets/js/plugins/popper.min.js" defer></script>
+  <script src="assets/js/plugins/simplebar.min.js" defer></script>
+  <script src="assets/js/plugins/bootstrap.min.js" defer></script>
+  <script src="assets/js/fonts/custom-font.js" defer></script>
+  <script src="assets/js/pcoded.js" defer></script>
+  <script src="assets/js/plugins/feather.min.js" defer></script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const callIfExists = (fnName, ...args) => {
+        if (typeof window[fnName] === 'function') {
+          try { window[fnName](...args); } catch (e) { console.warn(`${fnName} failed:`, e); }
+        } else {
+          console.debug(`${fnName} not available`);
+        }
+      };
+
+      callIfExists('layout_change', 'light');
+      callIfExists('layout_sidebar_change', 'dark');
+      callIfExists('change_box_container', 'false');
+      callIfExists('layout_caption_change', 'true');
+      callIfExists('layout_rtl_change', 'false');
+      callIfExists('preset_change', 'preset-1');
+    });
+  </script>
+
+
+
 </head>
+
 <body>
+  <div class="pc-loader">
+       <!-- Loader content -->
+    </div>
   <app-root></app-root>
+
+
+
 </body>
+
 </html>

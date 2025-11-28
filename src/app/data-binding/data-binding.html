@@ -1,0 +1,87 @@
+<div class="container-fluid p-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-primary text-white text-center">
+      <h3>Angular-DataBinding</h3>
+    </div>
+    <div class="card-body p-4">
+
+      <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ DataBinding</h5>
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="studentName" class="form-label">Full Name</label>
+            <input [disabled]="_isDisabled" type="text" class="form-control" id="studentName"
+              placeholder="Enter full name" required>
+          </div>
+          <div class="col-md-3">
+            <label for="studentName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="studentName" placeholder="Enter full name" required>
+          </div>
+          <div class="col-md-3">
+            <label for="studentAge" class="form-label">Age</label>
+            <input [disabled]="_isDisabled" type="number" class="form-control" id="studentAge" placeholder="Enter age"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select [disabled]="_isDisabled" class="form-select" id="gender" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <button class="btn btn-success px-4 me-2" type="buttton"
+            (click)="employeeInformation('gaurav')">Submit</button>
+        </div>
+
+      </form>
+
+      <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Reference Variable</h5>
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="studentName" class="form-label">Full Name</label>
+            <input #studentNameRef type="text" class="form-control" id="studentName" placeholder="Enter full name"
+              required>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-success px-4 me-2" type="buttton"
+              (click)="submitStudentInfo(studentNameRef.value)">Submit</button>
+
+          </div>
+          <div class="col-md-3">
+
+          </div>
+          <div class="col-md-3">
+
+          </div>
+        </div>
+
+      </form>
+      <h5 class="mb-3 text-primary border-bottom pb-2">3 Two Data Binding </h5>
+      
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="employeeName" class="form-label">Employee Full Name</label>
+            <input type="text" class="form-control"  name="employeeName"  id="employeeName" placeholder="Enter full name of Employe"  [(ngModel)]="employeeName" > 
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-success px-4 me-2" type="buttton">Submit</button>
+
+          </div>
+          <div class="col-md-3">
+            <h5 class="mt-4"> Hello {{ employeeName }} </h5>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+        </div>
+
+      
+
+
+    </div>
+
+  </div>
+</div>

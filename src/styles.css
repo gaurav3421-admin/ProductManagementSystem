@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 14px; }
+/* Make all Bootstrap form controls small globally */
+.form-control,
+.form-select,
+textarea {
+  font-size: 0.875rem;   /* slightly smaller text */
+  padding: 0.25rem 0.5rem; /* less padding */
+  height: auto;
+  border-radius: 0.2rem;
+}
+
+/* Make all buttons small */
+.btn {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+}
+
+/* Optional: make form labels smaller */
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+

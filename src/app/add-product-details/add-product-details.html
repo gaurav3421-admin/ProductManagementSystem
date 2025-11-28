@@ -1,0 +1,197 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h5>Add Product Details</h5>
+    </div>
+    <!-- Success Message Div -->
+    <div *ngIf="isProductAdded" class="alert  mt-3  p-1" [ngClass]="{
+       'alert-success': alertType === 'success',
+       'alert-danger': alertType === 'error',
+       'alert-info': alertType === 'info'
+     }" role="alert">
+        <p class="m-0 fw-bold">{{message}}</p>
+    </div>
+    <div class="card-body p-2">
+        <div class="container-fluid mt-1">
+            <div class="card p-4 shadow">
+
+                <form #productForm="ngForm" (ngSubmit)="addProductDetails(productForm)">
+                    <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Basic Information</h5>
+                    <div class="row mb-3">
+                        <!-- Title -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                placeholder="Enter product title" [(ngModel)]="product.title" required minlength="3"
+                                #title="ngModel">
+
+                            <div class="text-danger small" *ngIf="title.invalid && (title.dirty || title.touched)">
+                                <div *ngIf="title.errors?.['required']">Title is required.</div>
+                                <div *ngIf="title.errors?.['minlength']">Title must be at least 3 characters.</div>
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Category <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="category" [(ngModel)]="product.category"
+                                required #category="ngModel">
+
+                            <div class="text-danger small"
+                                *ngIf="category.invalid && (category.dirty || category.touched)">
+                                Category is required.
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="3" name="description" [(ngModel)]="product.description"
+                                required minlength="10" #description="ngModel"></textarea>
+
+                            <div class="text-danger small"
+                                *ngIf="description.invalid && (description.dirty || description.touched)">
+                                <div *ngIf="description.errors?.['required']">Description is required.</div>
+                                <div *ngIf="description.errors?.['minlength']">Description must be 10 characters
+                                    minimum.</div>
+                            </div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Price <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" name="price" [(ngModel)]="product.price" required
+                                min="1" #price="ngModel">
+
+                            <div class="text-danger small" *ngIf="price.invalid && (price.dirty || price.touched)">
+                                <div *ngIf="price.errors?.['required']">Price is required.</div>
+                                <div *ngIf="price.errors?.['min']">Price must be greater than 0.</div>
+                            </div>
+                        </div>
+
+                        <!-- Discount -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Discount (%)</label>
+                            <input type="number" class="form-control" name="discountPercentage"
+                                [(ngModel)]="product.discountPercentage" min="0" max="90" #discount="ngModel">
+
+                            <div class="text-danger small"
+                                *ngIf="discount.invalid && (discount.dirty || discount.touched)">
+                                <div *ngIf="discount.errors?.['max']">Discount cannot exceed 90%.</div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Rating</label>
+                            <input type="number" class="form-control" name="rating" [(ngModel)]="product.rating" min="0"
+                                max="5" step="0.1" #rating="ngModel">
+
+                            <div class="text-danger small" *ngIf="rating.invalid && (rating.dirty || rating.touched)">
+                                <div *ngIf="rating.errors?.['max']">Rating must be 0 – 5.</div>
+                            </div>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Stock <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" name="stock" [(ngModel)]="product.stock" required
+                                min="0" #stock="ngModel">
+
+                            <div class="text-danger small" *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+                                <div *ngIf="stock.errors?.['required']">Stock is required.</div>
+                            </div>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Brand</label>
+                            <input type="text" class="form-control" name="brand" [(ngModel)]="product.brand">
+                        </div>
+
+                        <!-- SKU -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">SKU</label>
+                            <input type="text" class="form-control" name="sku" [(ngModel)]="product.sku">
+                        </div>
+
+                        <!-- Weight -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Weight</label>
+                            <input type="number" class="form-control" name="weight" [(ngModel)]="product.weight"
+                                min="0">
+                        </div>
+
+                        <!-- Dimensions heading -->
+                        <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Dimensions</h5>
+
+                        <!-- Width -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Width</label>
+                            <input type="number" class="form-control" name="width" [(ngModel)]="product.width">
+                        </div>
+
+                        <!-- Height -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Height</label>
+                            <input type="number" class="form-control" name="height" [(ngModel)]="product.height">
+                        </div>
+
+                        <!-- Depth -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Depth</label>
+                            <input type="number" class="form-control" name="depth" [(ngModel)]="product.depth">
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Tags (comma separated)</label>
+                            <input type="text" class="form-control" name="tags" [(ngModel)]="product.tags">
+                        </div>
+
+                        <!-- Warranty -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Warranty Information</label>
+                            <input type="text" class="form-control" name="warrantyInformation"
+                                [(ngModel)]="product.warrantyInformation">
+                        </div>
+
+                        <!-- Shipping Info -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Shipping Information</label>
+                            <input type="text" class="form-control" name="shippingInformation"
+                                [(ngModel)]="product.shippingInformation">
+                        </div>
+
+                        <!-- Availability -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Availability Status</label>
+                            <input type="text" class="form-control" name="availabilityStatus"
+                                [(ngModel)]="product.availabilityStatus">
+                        </div>
+
+                        <!-- Return Policy -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Return Policy</label>
+                            <input type="text" class="form-control" name="returnPolicy"
+                                [(ngModel)]="product.returnPolicy">
+                        </div>
+
+                        <!-- MOQ -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Minimum Order Quantity</label>
+                            <input type="number" class="form-control" name="minimumOrderQuantity" min="1"
+                                [(ngModel)]="product.minimumOrderQuantity">
+                        </div>
+
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="btn btn-primary mt-3" [disabled]="!productForm.valid">
+                        Submit
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

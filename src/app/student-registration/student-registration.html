@@ -1,0 +1,116 @@
+
+
+        <!-- Section 1: Student Basic Information -->
+        <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Student Basic Information</h5>
+        <form #studentForm="ngForm" >
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="studentName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="studentName" placeholder="Enter full name" required>
+            </div>
+            <div class="col-md-3">
+              <label for="studentAge" class="form-label">Age</label>
+              <input type="number" class="form-control" id="studentAge" placeholder="Enter age" required>
+            </div>
+            <div class="col-md-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select class="form-select" id="gender" required>
+                <option selected disabled value="">Choose...</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="example@college.com" required>
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <label for="address" class="form-label">Address</label>
+              <textarea class="form-control" id="address" rows="2" placeholder="Enter complete address" required></textarea>
+            </div>
+          </div>
+
+          <!-- Section 2: Family Information -->
+          <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Family Information</h5>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="fatherName" class="form-label">Father’s Name</label>
+              <input type="text" class="form-control" id="fatherName" placeholder="Enter father's name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="motherName" class="form-label">Mother’s Name</label>
+              <input type="text" class="form-control" id="motherName" placeholder="Enter mother's name" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="parentContact" class="form-label">Parent Contact Number</label>
+              <input type="tel" class="form-control" id="parentContact" placeholder="Enter contact number" required>
+            </div>
+            <div class="col-md-6">
+              <label for="parentOccupation" class="form-label">Parent Occupation</label>
+              <input type="text" class="form-control" id="parentOccupation" placeholder="Enter occupation" required>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <label for="familyAddress" class="form-label">Family Address</label>
+              <textarea class="form-control" id="familyAddress" rows="2" placeholder="Enter family address"></textarea>
+            </div>
+          </div>
+
+          <!-- Section 3: Course Details -->
+          <h5 class="mb-3 text-primary border-bottom pb-2">3️⃣ Course Details</h5>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="courseName" class="form-label">Course Name</label>
+              <input type="text" class="form-control" id="courseName" placeholder="Enter course name" required>
+            </div>
+            <div class="col-md-3">
+              <label for="courseDuration" class="form-label">Duration (Years)</label>
+              <input type="number" class="form-control" id="courseDuration" placeholder="e.g. 3" required>
+            </div>
+            <div class="col-md-3">
+              <label for="semester" class="form-label">Semester</label>
+              <select class="form-select" id="semester" required>
+                <option selected disabled value="">Choose...</option>
+                <option>1st Semester</option>
+                <option>2nd Semester</option>
+                <option>3rd Semester</option>
+                <option>4th Semester</option>
+                <option>5th Semester</option>
+                <option>6th Semester</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <label for="specialization" class="form-label">Specialization</label>
+              <input type="text" class="form-control" id="specialization" placeholder="Enter specialization (if any)">
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-success px-4 me-2">Submit</button>
+            <button type="reset" class="btn btn-secondary px-4">Reset</button>
+          </div>
+
+        </form>
+      
+
+

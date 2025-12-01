@@ -10,7 +10,13 @@ export interface ProductItem {
     count: number;
   };
 }
-
+// Define an interface for the metrics data
+export interface BusinessMetrics {
+  totalProfit: number;
+  totalOrders: number;
+  averagePrice: number;
+  productsSold: number;
+}
 
 
 

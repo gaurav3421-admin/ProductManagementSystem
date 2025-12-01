@@ -9,6 +9,10 @@ import { AddProductDetails } from '../app/add-product-details/add-product-detail
 import { ProductDetails } from '../app/product-details/product-details';
 import { GetProductDetails } from '../app/get-product-details/get-product-details';
 import { Searchproduct } from '../app/searchproduct/searchproduct';
+import { DataTypes } from '../app/data-types/data-types';
+import { DataBinding } from '../app/data-binding/data-binding';
+import { Directives } from '../app/directives/directives';
+import { Dashboard } from '../app/dashboard/dashboard'
 import { Aggridexample } from '../app/aggridexample/aggridexample';
 import { ErrorPage } from '../app/error-page/error-page';
 
@@ -28,6 +32,7 @@ export const routes: Routes =
                component: Home,
                //loadComponent: () => import('../app/home/home').then(m => m.Home),
                children: [
+                    { path: 'dashboard', component: Dashboard },
                     { path: 'studentregistration', component: StudentRegistration },
                     { path: 'templatedrivenform', component: TemplateDrivenForm },
                     { path: 'reactiveform', component: ReactiveDrivenForm },
@@ -36,6 +41,9 @@ export const routes: Routes =
                     { path: 'aggridexample', component: Aggridexample },
                     { path: 'dummyproductdetails', component: GetProductDetails },
                     { path: 'searchproduct', component: Searchproduct },
+                    { path: 'datatypes', component: DataTypes },
+                    { path: 'dataBinding', component: DataBinding },
+                    { path: 'directives', component: Directives },
 
                     // //{ path: 'productdetailsnew', component: Productdetailsnew,canActivate: [authenticationGuard] },
                     // //{ path: 'addproduct', component: AddproductDetails},

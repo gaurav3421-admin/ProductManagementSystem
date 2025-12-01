@@ -13,6 +13,7 @@ export class DataTypes {
   _studentName:string ="This is my first Angular App";
   _studentAge:any=22;
   _isEnrolled:boolean=true;
+  _largeNumber: bigint = 9007199254740991n;
 
   // Object
  student = {
@@ -28,7 +29,6 @@ export class DataTypes {
   students: string[] = ["Gaurav", "Amit", "Rohan", "Sita"];
   marks: number[] = [85, 90, 78, 92];
 
-  
 
 
   //Array of Objects
@@ -41,6 +41,8 @@ export class DataTypes {
   // Tuple
   //Basic Tuple
  user: [number, string,string] = [101, "Gaurav","Choudhary"];
+
+
 
   //Tuple with Different DataTypes
   employee: [number, string, boolean] = [1, "Nitin", true];

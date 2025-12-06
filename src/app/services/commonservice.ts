@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { BusinessMetrics } from '../interfaces/product';
+import { BusinessMetrics }  from '../interfaces/product'
 
+// decorator to make this service available throughout the application
 @Injectable({
-  providedIn: 'root'
+   providedIn: 'root'
+  
 })
 
 export class Commonservice {

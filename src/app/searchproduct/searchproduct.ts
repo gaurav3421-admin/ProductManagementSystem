@@ -11,9 +11,45 @@ import { NgForm } from '@angular/forms'; // Import NgForm for template-driven fo
 })
 export class Searchproduct {
   searchText: string = '';
-  product: any = null;
   isLoading = false;
   errorMessage = '';
+
+  // initialize product with full shape so template bindings don't read null
+  product: any = {
+    id: null,
+    title: '',
+    brand: '',
+    description: '',
+    category: '',
+    sku: '',
+    availabilityStatus: '',
+    returnPolicy: '',
+    minimumOrderQuantity: null,
+    price: null,
+    discountPercentage: null,
+    rating: null,
+    stock: null,
+    tags: '', // template expects a comma-separated string
+    weight: null,
+    dimensions: {
+      width: null,
+      height: null,
+      depth: null
+    },
+    warrantyInformation: '',
+    shippingInformation: '',
+    meta: {
+      createdAt: '',
+      updatedAt: '',
+      barcode: ''
+    },
+    thumbnail: '',
+    images: []
+  };
+
+  isProductAdded = false;
+  message = '';
+  alertType: 'success' | 'error' | 'info' = 'success';
 
 
   SearchProduct() {

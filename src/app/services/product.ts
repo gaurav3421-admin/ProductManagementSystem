@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'; // Step 1 - Import HttpClient and HttpErrorResponse
 import { catchError, throwError, tap, Observable, map, from } from 'rxjs';
 import { ProductItem } from '../interfaces/Iproductdetails';
 
@@ -8,13 +8,15 @@ import { ProductItem } from '../interfaces/Iproductdetails';
 })
 export class Product {
     // Attempt to inject HttpClient if provided; if not, fall back to fetch()
+    //private apiBase = 'https://fakestoreapi.com/products';
+  private apiBase = 'https://dummyjson.com/products'; // API base enpoint
   
-  private _httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
+  private httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
 
-  //private apiBase = 'https://fakestoreapi.com/products';
-  private apiBase = 'https://dummyjson.com/products';
+  
 
-  constructor() { }
+
+  constructor(  ) {  }
 
   // Helper to perform fetch-based requests when HttpClient is not available
   private fetchJson<T>(url: string, init?: RequestInit): Observable<T> {
@@ -35,8 +37,8 @@ export class Product {
   // Method to Get all products
   getAllProducts(): Observable<ProductItem[]> {
     console.log("Get All Products Method Called");
-    if (this._httpClientRequest) {
-      return this._httpClientRequest.get<ProductItem[]>(this.apiBase).pipe(
+    if (this.httpClientRequest) {
+      return this.httpClientRequest.get<ProductItem[]>(this.apiBase).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);
           return throwError(() => error);
@@ -56,8 +58,8 @@ export class Product {
   getProductById(id: number | null): Observable<ProductItem> {
     console.log("Get Single Product Method Called");
     const url = `${this.apiBase}/${id}`;
-    if (this._httpClientRequest) {
-      return this._httpClientRequest.get<ProductItem>(url).pipe(
+    if (this.httpClientRequest) {
+      return this.httpClientRequest.get<ProductItem>(url).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);
           return throwError(() => error);
@@ -76,8 +78,8 @@ export class Product {
   // Method to Post
   addNewProduct(productData: ProductItem): Observable<ProductItem> {
     console.log("Add New Product Method Called");
-    if (this._httpClientRequest) {
-      return this._httpClientRequest.post<ProductItem>(this.apiBase, productData).pipe(
+    if (this.httpClientRequest) {
+      return this.httpClientRequest.post<ProductItem>(this.apiBase, productData).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);
           return throwError(() => error);
@@ -101,9 +103,9 @@ export class Product {
     console.log("Update product based on product id");
     const url = `${this.apiBase}/${productID}`;
 
-    if (this._httpClientRequest) {
+    if (this.httpClientRequest) {
       // Use simple put returning body directly
-      return this._httpClientRequest.put<ProductItem>(url, productData).pipe(
+      return this.httpClientRequest.put<ProductItem>(url, productData).pipe(
         tap(() => console.log('Update request succeeded')),
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);
@@ -128,8 +130,8 @@ export class Product {
     console.log("Delete product based on product id");
     const url = `${this.apiBase}/${productID}`;
 
-    if (this._httpClientRequest) {
-      return this._httpClientRequest.delete<ProductItem>(url).pipe(
+    if (this.httpClientRequest) {
+      return this.httpClientRequest.delete<ProductItem>(url).pipe(
         tap(() => console.log('Delete request succeeded')),
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);

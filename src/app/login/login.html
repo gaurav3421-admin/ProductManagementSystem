@@ -7,8 +7,8 @@
                     <h4 class="mb-3 f-w-400">Login Demo</h4>
                     <form #loginForm="ngForm" (ngSubmit)="Login(loginForm)" novalidate>
                         <div class="input-group mb-3"><span class="input-group-text"><i data-feather="user"></i></span>
-                            <input type="email" id="username" class="form-control form-control-lg"
-                                placeholder="Enter a valid email id" name="username" ngModel required />
+                            <input type="text" id="username" class="form-control form-control-lg"
+                                placeholder="Enter a valid username" name="username" ngModel required />
 
                         </div>
                         <div *ngIf="loginForm.controls['username']?.invalid 

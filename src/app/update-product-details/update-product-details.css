@@ -1,0 +1,16 @@
+.image-container {
+  /* Define a fixed or minimum height for the container while loading */
+  min-height: 200px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd; /* Optional border */
+}
+
+.spinner-placeholder {
+  /* Ensures the spinner container fills the parent space */
+  width: 100%;
+  height: 200px; 
+}
+
+/* Bootstrap utility class d-none is used in HTML to hide elements */

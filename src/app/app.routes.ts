@@ -6,10 +6,13 @@ import { StudentRegistration } from '../app/student-registration/student-registr
 import { TemplateDrivenForm } from '../app/template-driven-form/template-driven-form';
 import { ReactiveDrivenForm } from '../app/reactive-driven-form/reactive-driven-form'
 import { AddProductDetails } from '../app/add-product-details/add-product-details';
+import { UpdateProductDetails } from '../app/update-product-details/update-product-details';
+import { DeleteProductDetails } from '../app/delete-product-details/delete-product-details';
 import { ProductDetails } from '../app/product-details/product-details';
 import { GetProductDetails } from '../app/get-product-details/get-product-details';
 import { Searchproduct } from '../app/searchproduct/searchproduct';
 import { DataTypes } from '../app/data-types/data-types';
+import { Pipes } from '../app/pipes/pipes';
 import { DataBinding } from '../app/data-binding/data-binding';
 import { Directives } from '../app/directives/directives';
 import { Dashboard } from '../app/dashboard/dashboard'
@@ -37,6 +40,8 @@ export const routes: Routes =
                     { path: 'templatedrivenform', component: TemplateDrivenForm },
                     { path: 'reactiveform', component: ReactiveDrivenForm },
                     { path: 'addproductdetails', component: AddProductDetails },
+                    { path: 'updateproductdetails', component: UpdateProductDetails },
+                    { path: 'deleteproductdetails', component: DeleteProductDetails },
                     { path: 'productdetails', component: ProductDetails },
                     { path: 'aggridexample', component: Aggridexample },
                     { path: 'dummyproductdetails', component: GetProductDetails },
@@ -44,6 +49,7 @@ export const routes: Routes =
                     { path: 'datatypes', component: DataTypes },
                     { path: 'dataBinding', component: DataBinding },
                     { path: 'directives', component: Directives },
+                    { path: 'angularpipes', component: Pipes },
 
                     // //{ path: 'productdetailsnew', component: Productdetailsnew,canActivate: [authenticationGuard] },
                     // //{ path: 'addproduct', component: AddproductDetails},

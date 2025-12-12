@@ -12,7 +12,7 @@
                     <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Student Basic Information</h5>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label for="studentName" class="form-label">Full Name</label>
                             <!-- Add name attribute, [(ngModel)], required, and validation reference #fullName -->
                             <input type="text" class="form-control" id="studentName" placeholder="Enter full name"
@@ -42,6 +42,18 @@
                                 Gender is required.
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for="studentDOB" class="form-label">Date of Birth</label>
+                            <!-- Use standalone ngModel (no binding to studentData.dob) and validation reference #dob -->
+                            <input type="date" class="form-control" id="studentDOB" name="dob" ngModel required
+                                #dob="ngModel" [max]="todayString">
+
+                            <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="text-danger">
+                                <div *ngIf="dob.invalid && (dob.dirty || dob.touched)">Date of Birth is required.</div>
+                                <div *ngIf="dob.errors?.['max']">Date of Birth cannot be in the future.</div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row mb-3">
@@ -63,6 +75,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label">Hobbies (Select all that apply):</label>
+                            <div>
+                                <!-- Checkbox for Reading -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="hobbyReading" name="hobbies"
+                                        [(ngModel)]="studentData.hobbies.reading">
+                                    <label class="form-check-label" for="hobbyReading">Reading</label>
+                                </div>
+
+                                <!-- Checkbox for Gaming -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="hobbyGaming" name="hobbies"
+                                        [(ngModel)]="studentData.hobbies.gaming">
+                                    <label class="form-check-label" for="hobbyGaming">Gaming</label>
+                                </div>
+
+                                <!-- Checkbox for Sports -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="hobbySports" name="hobbies"
+                                        [(ngModel)]="studentData.hobbies.sports">
+                                    <label class="form-check-label" for="hobbySports">Sports</label>
+                                </div>
+
+                                <!-- Checkbox for Music -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="hobbyMusic" name="hobbies"
+                                        [(ngModel)]="studentData.hobbies.music">
+                                    <label class="form-check-label" for="hobbyMusic">Music</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row mb-4">
                         <div class="col-md-12">
@@ -74,6 +120,136 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Qualification Section -->
+                    <!-- Qualification Section -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Academic Qualification Details</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <!-- Headers (Table Head simulated with grid) -->
+                            <div class="row g-2 mb-2 text-center fw-bold">
+                                <div class="col-1">Sl.No.</div>
+                                <div class="col-2 text-start">Examination</div>
+                                <div class="col-4">Board/University</div>
+                                <div class="col-3">Percentage (%)</div>
+                                <div class="col-2">Year of Passing</div>
+                            </div>
+
+                            <!-- Row 1: Class X -->
+                            <div class="row g-2 mb-3 align-items-center">
+                                <div class="col-1 text-center">1</div>
+                                <div class="col-2">Class X</div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="ClassX_Board" maxlength="30"
+                                        placeholder="Board Name" required
+                                        [(ngModel)]="studentData.qualifications.classX.board" #boardX="ngModel"
+                                        [class.is-invalid]="boardX.invalid && (boardX.dirty || boardX.touched)">
+                                    <div *ngIf="boardX.invalid && (boardX.dirty || boardX.touched)"
+                                        class="invalid-feedback">
+                                        Board name is required.
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" name="ClassX_Percentage" maxlength="30"
+                                        placeholder="e.g., 85.50" required pattern="[0-9]{1,3}(\.[0-9]{1,2})?"
+                                        [(ngModel)]="studentData.qualifications.classX.percentage" #percentX="ngModel"
+                                        [class.is-invalid]="percentX.invalid && (percentX.dirty || percentX.touched)">
+                                    <div *ngIf="percentX.invalid && (percentX.dirty || percentX.touched)"
+                                        class="invalid-feedback">
+                                        Required. Upto 2 decimal places (e.g., 85.50).
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="ClassX_YrOfPassing" maxlength="4"
+                                        placeholder="YYYY" required pattern="[0-9]{4}"
+                                        [(ngModel)]="studentData.qualifications.classX.year" #yearX="ngModel"
+                                        [class.is-invalid]="yearX.invalid && (yearX.dirty || yearX.touched)">
+                                    <div *ngIf="yearX.invalid && (yearX.dirty || yearX.touched)"
+                                        class="invalid-feedback">
+                                        Valid 4-digit year required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Class XII (Optional fields shown here) -->
+                            <div class="row g-2 mb-3 align-items-center">
+                                <div class="col-1 text-center">2</div>
+                                <div class="col-2">Class XII</div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="ClassXII_Board" maxlength="30"
+                                        placeholder="Board Name"
+                                        [(ngModel)]="studentData.qualifications.classXII.board">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" name="ClassXII_Percentage" maxlength="30"
+                                        placeholder="e.g., 85.50" pattern="[0-9]{1,3}(\.[0-9]{1,2})?"
+                                        [(ngModel)]="studentData.qualifications.classXII.percentage">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="ClassXII_YrOfPassing" maxlength="4"
+                                        placeholder="YYYY" pattern="[0-9]{4}"
+                                        [(ngModel)]="studentData.qualifications.classXII.year">
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Graduation -->
+                            <div class="row g-2 mb-3 align-items-center">
+                                <div class="col-1 text-center">3</div>
+                                <div class="col-2">Graduation</div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="Graduation_Board" maxlength="30"
+                                        placeholder="University Name"
+                                        [(ngModel)]="studentData.qualifications.graduation.board">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" name="Graduation_Percentage" maxlength="30"
+                                        placeholder="e.g., 85.50" pattern="[0-9]{1,3}(\.[0-9]{1,2})?"
+                                        [(ngModel)]="studentData.qualifications.graduation.percentage">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="Graduation_YrOfPassing" maxlength="4"
+                                        placeholder="YYYY" pattern="[0-9]{4}"
+                                        [(ngModel)]="studentData.qualifications.graduation.year">
+                                </div>
+                            </div>
+
+                            <!-- Row 4: Masters -->
+                            <div class="row g-2 align-items-center">
+                                <div class="col-1 text-center">4</div>
+                                <div class="col-2">Masters</div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" name="Masters_Board" maxlength="30"
+                                        placeholder="University Name"
+                                        [(ngModel)]="studentData.qualifications.masters.board">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" name="Masters_Percentage" maxlength="30"
+                                        placeholder="e.g., 85.50" pattern="[0-9]{1,3}(\.[0-9]{1,2})?"
+                                        [(ngModel)]="studentData.qualifications.masters.percentage">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" name="Masters_YrOfPassing" maxlength="4"
+                                        placeholder="YYYY" pattern="[0-9]{4}"
+                                        [(ngModel)]="studentData.qualifications.masters.year">
+                                </div>
+                            </div>
+
+                            <!-- Helper Text -->
+                            <div class="row mt-2">
+                                <div class="col-12 text-end text-muted small">
+                                    * Fields for Class XII, Graduation, and Masters use the same pattern structure but
+                                    are optional in this example.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
 
                     <!-- Section 2: Family Information -->
                     <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Family Information</h5>

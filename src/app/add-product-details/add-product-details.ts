@@ -45,6 +45,7 @@ export class AddProductDetails {
     if (addProductForm.valid) {
       console.log(" called InsertemployeeDetails() method");
       console.log(addProductForm.value);
+      
       this._productdummyservice.addNewProduct(addProductForm.value).subscribe(
         (response) => {
           console.log("Product added successfully:", response);

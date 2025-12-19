@@ -104,7 +104,7 @@ export class Productdummyservice {
 
   updateProduct(productID: number, productData: ProductItem): Observable<ProductItem> {
     console.log("Update product based on product id");
-    const url = `${this.apiBase}/${productID}`;
+    const url = `${this.apiBase}/${productID}`;  //https://dummyjson.com/products/1
 
     if (this.httpClientRequest) {
       // Use simple put returning body directly

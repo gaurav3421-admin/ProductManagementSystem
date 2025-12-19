@@ -1,0 +1,133 @@
+<!-- ...existing code... -->
+<div class="card table-card">
+  <div class="card-header">
+    <h5>Angular Advanced Topics</h5>
+  </div>
+  <div class="card-body p-2">
+    <div class="container-fulid mt-1">
+
+      <div class="card p-4 shadow mb-3">
+        <h6>1. Using map Operator to Transform Data</h6>
+        <p>Demonstrates how to use the map operator to transform the data received from an API.</p>
+        <h6>2. Using switchMap Operator for Dependent API Calls</h6>
+        <p>Shows how to use switchMap to handle dependent API calls effectively.</p>
+        <h6>3. Using catchError Operator for Error Handling</h6>
+        <p>Illustrates how to implement error handling in observables using the catchError operator.</p>
+      </div>
+
+      <!-- productNames (map) -->
+      <div class="card p-4 shadow mb-3">
+        <h6>Map Operator — Product Names</h6>
+        <p>Transformed list of product names (map).</p>
+
+        <ng-container *ngIf="productNames && productNames.length; else noNames">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th style="width:50px">#</th>
+                <th>Product Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let name of productNames; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #noNames>
+          <p class="text-muted">No product names available.</p>
+        </ng-template>
+      </div>
+
+      <!-- productTitles (switchMap) -->
+      <div class="card p-4 shadow mb-3">
+        <h6>switchMap Operator — Product Titles</h6>
+        <p>Titles resolved via dependent calls (switchMap).</p>
+
+        <ng-container *ngIf="productTitles && productTitles.length; else noTitles">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th style="width:50px">#</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of productTitles; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ t }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #noTitles>
+          <p class="text-muted">No product titles available.</p>
+        </ng-template>
+      </div>
+
+      <!-- expensiveProducts (filter) -->
+      <div class="card p-4 shadow mb-3">
+        <h6>Filter Operator — Expensive Products</h6>
+        <p>Products filtered by price (example: price &gt; 500).</p>
+
+        <ng-container *ngIf="expensiveProducts && expensiveProducts.length; else noExpensive">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th style="width:50px">#</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of expensiveProducts; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ p.id }}</td>
+                <td>{{ p.title }}</td>
+                <td>₹{{ p.price }}</td>
+                <td>{{ p.category }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #noExpensive>
+          <p class="text-muted">No expensive products found for the selected threshold.</p>
+        </ng-template>
+      </div>
+
+      <!-- safeProducts (catchError) -->
+      <div class="card p-4 shadow mb-3">
+        <h6>catchError Operator — Safe Fetch (with fallback)</h6>
+        <p>Fetch with error handling and fallback results.</p>
+
+        <ng-container *ngIf="safeProducts && safeProducts.length; else noSafe">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th style="width:50px">#</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of safeProducts; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ s.title }}</td>
+                <td>₹{{ s.price }}</td>
+                <td>{{ s.category }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #noSafe>
+          <p class="text-muted">No products (or an error occurred and was handled).</p>
+        </ng-template>
+      </div>
+
+      <!-- ...existing code... -->
+    </div>

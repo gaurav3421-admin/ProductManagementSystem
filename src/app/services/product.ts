@@ -99,6 +99,8 @@ export class Product {
     }
   }
 
+  
+
   updateProduct(productID: number, productData: ProductItem): Observable<ProductItem> {
     console.log("Update product based on product id");
     const url = `${this.apiBase}/${productID}`;

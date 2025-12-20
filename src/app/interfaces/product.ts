@@ -17,7 +17,12 @@ export interface BusinessMetrics {
   averagePrice: number;
   productsSold: number;
 }
-
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
 
 
 

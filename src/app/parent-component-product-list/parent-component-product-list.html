@@ -1,0 +1,11 @@
+<!-- ...existing code... -->
+<div class="card-body p-2">
+    <div class="container-fulid mt-1">
+        <div class="card p-4 shadow">
+            <h2>Our Inventory</h2>
+            <div class="list-container">
+                <app-child-component-product-card *ngFor="let item of products" [product]="item"  > </app-child-component-product-card>
+            </div>
+        </div>
+    </div>
+</div>

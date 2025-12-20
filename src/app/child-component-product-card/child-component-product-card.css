@@ -1,0 +1,9 @@
+/* ...existing code... */
+.product-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+/* ...existing code... */

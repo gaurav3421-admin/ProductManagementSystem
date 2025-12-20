@@ -18,6 +18,7 @@ import { Directives } from '../app/directives/directives';
 import { Dashboard } from '../app/dashboard/dashboard'
 import { Aggridexample } from '../app/aggridexample/aggridexample';
 import { AdvanceTopics } from '../app/advance-topics/advance-topics';
+import { ParentComponentProductList } from '../app/parent-component-product-list/parent-component-product-list';
 import { ErrorPage } from '../app/error-page/error-page';
 
 export const routes: Routes =
@@ -52,6 +53,8 @@ export const routes: Routes =
                     { path: 'directives', component: Directives },
                     { path: 'angularpipes', component: Pipes },
                     { path: 'advancedtopics', component: AdvanceTopics },
+                    { path: 'InputAndOutputdecorator', component: ParentComponentProductList },
+
                     
                     // Alternative lazy loading approach
                     //  { path: 'dashboard', loadComponent: () => import('../app/dashboard/dashboard').then(m => m.Dashboard) },
@@ -69,6 +72,8 @@ export const routes: Routes =
                     //  { path: 'dataBinding', loadComponent: () => import('../app/data-binding/data-binding').then(m => m.DataBinding) },
                     //  { path: 'directives', loadComponent: () => import('../app/directives/directives').then(m => m.Directives) },
                     //  { path: 'angularpipes', loadComponent: () => import('../app/pipes/pipes').then(m => m.Pipes) },
+                    //  { path: 'advancedtopics', loadComponent: () => import('../app/advance-topics/advance-topics').then(m => m.AdvanceTopics) },
+                    //  { path: 'InputAndOutputdecorator', loadComponent: () => import('../app/parent-component-product-list/parent-component-product-list').then(m => m.ParentComponentProductList) }
 
                     // //{ path: 'productdetailsnew', component: Productdetailsnew,canActivate: [authenticationGuard] },
                     // //{ path: 'addproduct', component: AddproductDetails},

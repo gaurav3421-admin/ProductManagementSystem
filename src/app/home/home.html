@@ -12,10 +12,8 @@
                     <label>Dashboard</label>
                 </li>
                 <li class="pc-item">
-                    <a class="pc-link" routerLink="/home/dashboard" routerLinkActive="active" href="/home/dashboard">
-                        <span class="pc-micon">
-                            <i class="material-icons-two-tone">home</i>
-                        </span>
+                    <a class="pc-link" [routerLink]="['/home','dashboard']" routerLinkActive="active">
+                        <span class="pc-micon"><i class="material-icons-two-tone">home</i></span>
                         <span class="pc-mtext">Dashboard</span>
                     </a>
                 </li>
@@ -25,43 +23,41 @@
                     <span>Product Details</span>
                 </li>
                 <li class="pc-item">
-                    <a routerLink="/home/dummyproductdetails" routerLinkActive="active" href="/home/dummyproductdetails"
+                    <a [routerLink]="['/home','dummyproductdetails']" routerLinkActive="active" 
                         class="pc-link">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">details</i>
                         </span>
                         <span class="pc-mtext">Product Details</span>
                     </a>
-                    <a class="pc-link" routerLink="/home/addproductdetails" routerLinkActive="active"
-                        href="/home/addproductdetails">
+                    <a class="pc-link" [routerLink]="['/home','addproductdetails']" routerLinkActive="active">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">add</i>
                         </span>
                         <span class="pc-mtext">Add Product</span>
                     </a>
-                    <a  class="pc-link" routerLink="/home/updateproductdetails" routerLinkActive="active"
-                        href="/home/updateproductdetails">
+                    <a class="pc-link" [routerLink]="['/home','updateproductdetails']" routerLinkActive="active">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">update</i>
                         </span>
                         <span class="pc-mtext">Update Product</span>
                     </a>
-                    <a  class="pc-link" routerLink="/home/deleteproductdetails" routerLinkActive="active"
-                        href="/home/deleteproductdetails">
+                    <a class="pc-link" [routerLink]="['/home','deleteproductdetails']" routerLinkActive="active">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">delete</i>
                         </span>
                         <span class="pc-mtext">Delete Product</span>
 
                     </a>
-                    <a routerLink="/home/searchproduct" routerLinkActive="active" href="/home/searchproduct" class="pc-link" >
+                    <a [routerLink]="['/home','searchproduct']" routerLinkActive="active"
+                        class="pc-link">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">search</i>
                         </span>
                         <span class="pc-mtext">Search Product</span>
 
                     </a>
-                    <a routerLink="/home/studentregistration" routerLinkActive="active" href="/home/studentregistration"
+                    <a [routerLink]="['/home','studentregistration']" routerLinkActive="active"
                         class="pc-link">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">supervised_user_circle</i>
@@ -97,48 +93,49 @@
                     <div class="collapse" id="submenu1">
                         <ul class="pc-submenu nav flex-column ms-3">
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/directives" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','directives']" routerLinkActive="active"
                                     href="/home/directives">Directives</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/dataBinding" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','dataBinding']" routerLinkActive="active"
                                     href="/home/dataBinding">DataBinding</a>
                             </li>
                             <li class="pc-item ">
-                                <a routerLink="/home/InputAndOutputdecorator" routerLinkActive="active"
-                                    href="/home/InputAndOutputdecorator" class="pc-link">Angular-Input and Output Decorator</a>
+                                <a [routerLink]="['/home','InputAndOutputdecorator']" routerLinkActive="active"
+                                    class="pc-link">Angular-Input and Output
+                                    Decorator</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/angularpipes" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','angularpipes']" routerLinkActive="active"
                                     href="/home/angularpipes">Pipes</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/datatypes" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','datatypes']" routerLinkActive="active"
                                     href="/home/datatypes">DataTypes</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/templatedrivenform" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','templatedrivenform']" routerLinkActive="active"
                                     href="/home/templatedrivenform">Template Driven Form</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/reactiveform" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','reactiveform']" routerLinkActive="active"
                                     href="/home/reactiveform">Reactive Form</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/reactiveform" routerLinkActive="active"
-                                    href="/home/reactiveform">Services</a>
+                                <a class="pc-link " [routerLink]="['/home','services']" routerLinkActive="active"
+                                    href="/home/services">Services</a>
                             </li>
                             <li class="pc-item ">
-                                <a class="pc-link " routerLink="/home/aggridexample" routerLinkActive="active"
+                                <a class="pc-link " [routerLink]="['/home','aggridexample']" routerLinkActive="active"
                                     href="/home/aggridexample">AG Grid</a>
                             </li>
                             <li class="pc-item ">
-                                <a routerLink="/home/productdetails" routerLinkActive="active"
-                                    href="/home/productdetails" class="pc-link">Product Details-AG Grid-API</a>
+                                <a [routerLink]="['/home','productdetails']" routerLinkActive="active"
+                                    class="pc-link">Product Details-AG Grid-API</a>
                             </li>
                             <li class="pc-item ">
-                                <a routerLink="/home/advancedtopics" routerLinkActive="active"
-                                    href="/home/advancedtopics" class="pc-link">Angular-Advance Features</a>
+                                <a [routerLink]="['/home','advancedtopics']" routerLinkActive="active"
+                                    class="pc-link">Angular-Advance Features</a>
                             </li>
 
                         </ul>
@@ -154,8 +151,7 @@
                 </li>
                 <li class="pc-item">
 
-                    <a href="login" routerLink="/login" routerLinkActive="active" href="login" class="pc-link"
-                        target="">
+                    <a routerLinkActive="active" class="pc-link" target="" (click)="LogOut()">
                         <span class="pc-micon">
                             <i class="material-icons-two-tone">verified_user</i>
                         </span>
@@ -433,8 +429,8 @@
     <div class="footer-wrapper container-fluid">
         <div class="row">
             <div class="col my-1">
-                <p class="m-0">Project Product Management  &#9829; crafted by Angular Student <a href="https://codedthemes.com/"
-                        target="_blank">Sample Project</a>
+                <p class="m-0">Project Product Management &#9829; crafted by Angular Student <a
+                        href="https://codedthemes.com/" target="_blank">Sample Project</a>
                 </p>
             </div>
             <div class="col-auto my-1">

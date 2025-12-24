@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,14 +17,19 @@ export class Login {
 private _isuserLoggedIn: boolean = false;
 
   //constructor(private _routerLink: Router,private authService: Authentication) { };
-  constructor(private _routerLink: Router) { };
+  //constructor(private _routerLink: Router) { };
 
       // call this from template (e.g. (ngSubmit)="onSubmit(loginForm)")
+
+      private authService = inject(Authentication);
+      private router = inject(Router);
       
   Login(_loginForm: NgForm): void {
     if (_loginForm.valid) {
       console.log('Valid Form');
-      this._routerLink.navigate(['//home/dashboard']);
+      this.authService.userlogin('ake-jwt-token');
+      this.router.navigate(['/home/dashboard']);
+
       // this.authService.userlogintokenid(_loginForm.value)?.subscribe(
       // (response) => {
       //   console.log("API Response:", response);

@@ -1,63 +1,68 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { IUser, ILoginResponse } from '../interfaces/authentication';
 import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class Authentication {
   private _isuserLoggedIn: boolean = false;
-  //private tokenKey = 'authToken';
   private base = 'https://dummyjson.com';
   private tokenKey = 'auth_access_token';
   private refreshKey = 'auth_refresh_token';
   private userKey = 'auth_user';
 
-  // observable auth state
-  private userSubject = new BehaviorSubject<IUser | null>(this.loadUser());
-  user$ = this.userSubject.asObservable();
+  // optional HttpClient (won't throw if provider missing)
+  private httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
 
-  //private tokenKey = 'authToken';
-  //private httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
+  constructor() { }
 
-  constructor(private httpClientRequest: HttpClient) { };
+  // safe check for storage availability
+  private storageAvailable(): boolean {
+    return (typeof window !== 'undefined') && (typeof window.localStorage !== 'undefined');
+  }
 
-  userlogin(): void {
-    this._isuserLoggedIn = true;
-    //localStorage.setItem(this.tokenKey, token);
-    console.log("User is logged in and Value of  _isuserLoggedIn :", this._isuserLoggedIn);
+  // init signal in a safe way (no direct global localStorage access at module eval time)
+  private isAuthenticatedSignal = signal<boolean>((typeof window !== 'undefined' && !!(window as any).localStorage?.getItem('token')) ?? false);
 
+  userlogin(token: string): void {
+    if (this.storageAvailable()) {
+      window.localStorage.setItem('token', token);
+      console.log("Called =>  Authentication service =>userlogin=>Set token");
+    }
+    this.isAuthenticatedSignal.set(true);
+    console.log("Called =>  Authentication service =>userlogin=>Value of isAuthenticatedSignal :", this.isAuthenticatedSignal());
   }
 
   userlogout(): void {
-    localStorage.removeItem('authToken');
-    //this._isuserLoggedIn = false;
-    console.log("Value of Token :", localStorage.getItem('authToken'));
-
+    if (this.storageAvailable()) {
+      console.log("Called =>  Authentication service =>userlogout=>Remove token");
+      window.localStorage.removeItem('token');
+    }
+    this.isAuthenticatedSignal.set(false);
+    console.log("Called =>  Authentication service =>userlogout=>Value of isAuthenticatedSignal :", this.isAuthenticatedSignal());
   }
 
   isuserLoggedIn(): boolean {
-
-
-    // token = localStorage.getItem('authToken');
-    //console.log("Check user status and Value of  _isuserLoggedIn :", this._isuserLoggedIn);
-    //console.log("User Logged in Token:", localStorage.getItem('authToken'));
-    return !!localStorage.getItem('authToken'); // Returns true if a token exists, false otherwise
+    return this.isAuthenticatedSignal();
   }
 
   userlogintokenid(loginUser: any): Observable<any> | undefined {
+    if (!this.httpClientRequest) {
+      console.warn('HttpClient not available; userlogintokenid will not perform HTTP call.');
+      return undefined;
+    }
+
     const url = `${this.base}/auth/login`;
     const loginData = {
-      username: loginUser.username,   //  'emilys',
-      password: loginUser.password,               // 'emilyspass',
+      username: loginUser.username,
+      password: loginUser.password,
       expiresInMins: 30
     };
     console.log("Authentication Service Call=>Data Request:", loginData);
 
     return this.httpClientRequest.post<any>(url, loginData, {
-      //withCredentials: true,
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -66,25 +71,30 @@ export class Authentication {
       })
     );
   }
+
   userlogintokenidnew(loginUser: any): void {
+    if (!this.httpClientRequest) {
+      console.warn('HttpClient not available; userlogintokenidnew will not perform HTTP call.');
+      return;
+    }
     const loginData = {
-      username: loginUser.username,   //  'emilys',
-      password: loginUser.password,               // 'emilyspass',
+      username: loginUser.username,
+      password: loginUser.password,
       expiresInMins: 30
     };
     console.log("Login Data:", loginData);
     this.httpClientRequest.post<any>('https://dummyjson.com/auth/login', loginData, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      //withCredentials: true
     }).subscribe(
       (response) => {
-        //this._isuserLoggedIn = true;
-        console.log("Value of _isuserLoggedIn ", this._isuserLoggedIn);
         console.log("Login response:", response);
-        if (response.token) {
-          localStorage.setItem('user', JSON.stringify(response));
-          localStorage.setItem('authToken', response.accessToken);
-          console.log("Token stored in localStorage:", response.accessToken);
+        if (response.token || response.accessToken) {
+          if (this.storageAvailable()) {
+            window.localStorage.setItem('user', JSON.stringify(response));
+            const token = response.accessToken ?? response.token;
+            window.localStorage.setItem('authToken', token);
+          }
+          this.isAuthenticatedSignal.set(true);
         }
       },
       (error: HttpErrorResponse) => {
@@ -94,28 +104,19 @@ export class Authentication {
     );
   }
 
-    // helper to detect browser storage availability
-  private storageAvailable(): boolean {
-    return (typeof window !== 'undefined') && (typeof window.localStorage !== 'undefined');
-  }
-  /* LOGIN
-     Sends POST to /auth/login with {username, password, expiresInMins?}.
-     Use withCredentials:true if you want cookies to be used (DummyJSON sets cookies too).
-     Example response shape documented in DummyJSON docs. :contentReference[oaicite:1]{index=1}
-  */
   login(username: string, password: string, expiresInMins?: number): Observable<IUser> {
+    if (!this.httpClientRequest) {
+      return throwError(() => new Error('HttpClient not available'));
+    }
     const url = `${this.base}/auth/login`;
     const body: any = { username, password };
     if (expiresInMins) body.expiresInMins = expiresInMins;
 
-    return this.httpClientRequest.post<ILoginResponse>(url, body, { 
-     // withCredentials: true 
-    }).pipe(
+    return this.httpClientRequest.post<ILoginResponse>(url, body).pipe(
       tap(res => {
         if (res.accessToken) {
           this.setTokens(res.accessToken, res.refreshToken ?? null);
         }
-        // store basic user object
         const user: IUser = {
           id: res.id,
           username: res.username,
@@ -125,6 +126,7 @@ export class Authentication {
           image: res.image
         };
         this.setUser(user);
+        this.isAuthenticatedSignal.set(true);
       }),
       map(res => ({
         id: res.id,
@@ -134,16 +136,12 @@ export class Authentication {
         lastName: res.lastName,
         image: res.image
       })),
-      catchError(err => {
-        // surface a readable error
-        return throwError(() => err);
-      })
+      catchError(err => throwError(() => err))
     );
   }
 
-  // ---------- storage helpers ----------
   private setTokens(accessToken: string, refreshToken?: string | null) {
-     if (!this.storageAvailable()) return;
+    if (!this.storageAvailable()) return;
     window.localStorage.setItem(this.tokenKey, accessToken);
     if (refreshToken) window.localStorage.setItem(this.refreshKey, refreshToken);
   }
@@ -152,11 +150,11 @@ export class Authentication {
     if (this.storageAvailable()) {
       window.localStorage.setItem(this.userKey, JSON.stringify(user));
     }
-    this.userSubject.next(user);
   }
 
   private loadUser(): IUser | null {
-    const raw = localStorage.getItem(this.userKey);
+    if (!this.storageAvailable()) return null;
+    const raw = window.localStorage.getItem(this.userKey);
     if (!raw) return null;
     try {
       return JSON.parse(raw) as IUser;
@@ -164,16 +162,16 @@ export class Authentication {
       return null;
     }
   }
-  /* LOGOUT - clear local storage and subject */
+
   logout(): void {
     this.clearStorage();
-    this.userSubject.next(null);
+    this.isAuthenticatedSignal.set(false);
   }
+
   private clearStorage() {
     if (!this.storageAvailable()) return;
     window.localStorage.removeItem(this.tokenKey);
     window.localStorage.removeItem(this.refreshKey);
     window.localStorage.removeItem(this.userKey);
   }
-
 }

@@ -20,13 +20,17 @@ import { Aggridexample } from '../app/aggridexample/aggridexample';
 import { AdvanceTopics } from '../app/advance-topics/advance-topics';
 import { ParentComponentProductList } from '../app/parent-component-product-list/parent-component-product-list';
 import { ErrorPage } from '../app/error-page/error-page';
+import { authGuard, authChildGuard } from '../app/auth-guard';
+
+
 
 export const routes: Routes =
      [
           //{ path: 'productdetails', component: ProductDetails },
           { path: '', component: Login, pathMatch: 'full' }, // default route
           { path: 'login', component: Login },
-          { path: 'home', component: Home }, // Step 3
+          //{ path: 'home', component: Home }, // Step 3
+          //{ path: 'home', component: Home, canActivate: [authGuard] }, // Step 3
           //{ path: 'home', component: Home, canActivate: [authenticationnewGuard] }, // Step 3
           //{ path: 'home', component: Home, canActivate: [authenticationGuard] }, // Step 3
           //{ path: 'home/productdetailsnew', component: Productdetailsnew,canActivate: [authenticationGuard] },
@@ -35,6 +39,8 @@ export const routes: Routes =
           {
                path: 'home',
                component: Home,
+               canActivate: [authGuard],
+               canActivateChild: [authChildGuard],
                //loadComponent: () => import('../app/home/home').then(m => m.Home),
                children: [
                     { path: 'dashboard', component: Dashboard },
@@ -55,7 +61,7 @@ export const routes: Routes =
                     { path: 'advancedtopics', component: AdvanceTopics },
                     { path: 'InputAndOutputdecorator', component: ParentComponentProductList },
 
-                    
+
                     // Alternative lazy loading approach
                     //  { path: 'dashboard', loadComponent: () => import('../app/dashboard/dashboard').then(m => m.Dashboard) },
                     //  { path: 'studentregistration', loadComponent: () => import('../app/student-registration/student-registration').then(m => m.StudentRegistration) },

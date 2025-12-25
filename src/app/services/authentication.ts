@@ -26,9 +26,10 @@ export class Authentication {
   // init signal in a safe way (no direct global localStorage access at module eval time)
   private isAuthenticatedSignal = signal<boolean>((typeof window !== 'undefined' && !!(window as any).localStorage?.getItem('token')) ?? false);
 
-  userlogin(token: string): void {
+  userlogin(token: string, userRole: any): void {
     if (this.storageAvailable()) {
       window.localStorage.setItem('token', token);
+      this.setUser(userRole);
       console.log("Called =>  Authentication service =>userlogin=>Set token");
     }
     this.isAuthenticatedSignal.set(true);
@@ -146,10 +147,36 @@ export class Authentication {
     if (refreshToken) window.localStorage.setItem(this.refreshKey, refreshToken);
   }
 
+  // example: call this when login response arrives to persist user + role
   private setUser(user: IUser) {
     if (this.storageAvailable()) {
       window.localStorage.setItem(this.userKey, JSON.stringify(user));
     }
+  }
+
+  // return stored user object if available
+  getUser(): any | null {
+    if (!this.storageAvailable()) return null;
+    const raw = window.localStorage.getItem(this.userKey);
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  }
+  // check single role (supports string or array on user object)
+  hasRole(role: string): boolean {
+    console.debug('[Auth] hasRole -> User Role=>', role);
+    const u = this.getUser();
+    if (!u) {
+      console.debug('[Auth] hasRole -> no user, role check failed for', role);
+      return false;
+    }
+    const r = u.role ?? u.roles;
+    if (!r) {
+      console.debug('[Auth] hasRole -> user has no role property');
+      return false;
+    }
+    const result = Array.isArray(r) ? r.includes(role) : String(r) === role;
+    console.debug('[Auth] hasRole -> role:', role, 'result:', result, 'userRoles:', r);
+    return result;
   }
 
   private loadUser(): IUser | null {
@@ -167,6 +194,9 @@ export class Authentication {
     this.clearStorage();
     this.isAuthenticatedSignal.set(false);
   }
+
+
+
 
   private clearStorage() {
     if (!this.storageAvailable()) return;

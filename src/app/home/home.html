@@ -22,7 +22,7 @@
                     <i class="material-icons-two-tone">business_center</i>
                     <span>Product Details</span>
                 </li>
-                <li class="pc-item">
+                <li class="pc-item" [ngStyle]="{ display: userRole == 'Admin' ? 'block' : 'none' }">
                     <a [routerLink]="['/home','dummyproductdetails']" routerLinkActive="active" 
                         class="pc-link">
                         <span class="pc-micon">

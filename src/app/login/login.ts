@@ -27,7 +27,8 @@ private _isuserLoggedIn: boolean = false;
   Login(_loginForm: NgForm): void {
     if (_loginForm.valid) {
       console.log('Valid Form');
-      this.authService.userlogin('ake-jwt-token');
+      console.log('User Role:', _loginForm.value.role);
+      this.authService.userlogin('ake-jwt-token', _loginForm.value.role);
       this.router.navigate(['/home/dashboard']);
 
       // this.authService.userlogintokenid(_loginForm.value)?.subscribe(

@@ -1,6 +1,6 @@
-import { Component,inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router,RouterLink, RouterOutlet,RouterLinkActive  } from '@angular/router';
+import { Router, RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { Authentication } from '../services/authentication';
 
 
@@ -10,12 +10,20 @@ import { Authentication } from '../services/authentication';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements OnInit {
+  userRole: string | undefined;
+  constructor(private _routerLink: Router) { };
+  public authService = inject(Authentication);
+  private router = inject(Router);
+  //constructor(private router: Router, private authService: Authentication) {}
 
-//  constructor(private _routerLink: Router) { };
-  //private authService = inject(Authentication);
-  //private router = inject(Router);
-constructor(private router: Router, private authService: Authentication) {}
+  ngOnInit() {
+
+    this.userRole = this.authService.getUser();
+    console.log("Home Component ngOnInit=> User Role from localStorage :", this.userRole);
+
+  }
+
 
   LogOut(): void {
     //alert("Logout Clicked");

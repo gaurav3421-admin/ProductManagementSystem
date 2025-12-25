@@ -26,33 +26,76 @@
   <!-- Start- [Page Specific JS] -->
   <!-- <script src="assets/js/plugins/apexcharts.min.js" defer></script>
   <script src="assets/js/pages/dashboard-default.js" defer></script> -->
-
-  <script src="assets/js/plugins/popper.min.js" defer></script>
+  <!-- <script src="assets/js/plugins/popper.min.js" defer></script>
   <script src="assets/js/plugins/simplebar.min.js" defer></script>
   <script src="assets/js/plugins/bootstrap.min.js" defer></script>
   <script src="assets/js/fonts/custom-font.js" defer></script>
   <script src="assets/js/pcoded.js" defer></script>
+  <script src="assets/js/plugins/feather.min.js" defer></script> -->
+
+  <!-- other plugins deferred -->
+  <script src="assets/js/plugins/popper.min.js" defer></script>
+  <script src="assets/js/plugins/simplebar.min.js" defer></script>
+  <script src="assets/js/plugins/bootstrap.min.js" defer></script>
+
+  <!-- custom-font uses document.write -> load synchronously -->
+  <script src="assets/js/fonts/custom-font.js"></script>
+
   <script src="assets/js/plugins/feather.min.js" defer></script>
-
-
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const callIfExists = (fnName, ...args) => {
-        if (typeof window[fnName] === 'function') {
-          try { window[fnName](...args); } catch (e) { console.warn(`${fnName} failed:`, e); }
-        } else {
-          console.debug(`${fnName} not available`);
-        }
-      };
+    // safe caller for functions that may be defined by pcoded.js
+    function callIfExists(fnName, ...args) {
+      try {
+        const fn = window[fnName];
+        if (typeof fn === 'function') fn(...args);
+      } catch (e) {
+        console.warn(fnName + ' invocation failed', e);
+      }
+    }
 
-      callIfExists('layout_change', 'light');
-      callIfExists('layout_sidebar_change', 'dark');
-      callIfExists('change_box_container', 'false');
-      callIfExists('layout_caption_change', 'true');
-      callIfExists('layout_rtl_change', 'false');
-      callIfExists('preset_change', 'preset-1');
+    window.addEventListener('load', () => {
+      try {
+        // defensive placeholders to avoid pcoded.js touching missing elements
+        const ensureId = (id) => {
+          if (!document.getElementById(id)) {
+            const el = document.createElement('div');
+            el.id = id;
+            el.style.display = 'none';
+            document.body.appendChild(el);
+          }
+        };
+        ensureId('pcoded-loader');
+        ensureId('pcoded-overlay');
+
+        const s = document.createElement('script');
+        s.src = 'assets/js/pcoded.js';
+        s.defer = false;
+        s.onload = () => {
+          console.debug('pcoded.js loaded');
+          // ensure sidebar uses dark layout after pcoded.js initializes
+          callIfExists('layout_sidebar_change', 'dark');
+          // optional: call other safe initializers if you need them
+          // callIfExists('layout_change', 'light');
+          // callIfExists('preset_change', 'preset-1');
+        };
+        s.onerror = (e) => console.warn('pcoded.js failed to load', e);
+        document.body.appendChild(s);
+      } catch (e) {
+        console.warn('Failed to load pcoded.js safely', e);
+      }
     });
   </script>
+      
+      <!-- //callIfExists('layout_change', 'light');
+      //callIfExists('layout_sidebar_change', 'dark');
+      //callIfExists('change_box_container', 'false');
+      //callIfExists('layout_caption_change', 'true');
+      //callIfExists('layout_rtl_change', 'false');
+      //callIfExists('preset_change', 'preset-1');  -->
+
+
+
+ 
 
 
 
@@ -60,8 +103,8 @@
 
 <body>
   <div class="pc-loader">
-       <!-- Loader content -->
-    </div>
+    <!-- Loader content -->
+  </div>
   <app-root></app-root>
 
 

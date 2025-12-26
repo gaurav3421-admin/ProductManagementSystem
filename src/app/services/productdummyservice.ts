@@ -8,14 +8,14 @@ import { IProductDelete } from '../interfaces/Iproductdetails';
   providedIn: 'root'
 })
 export class Productdummyservice {
-    // Attempt to inject HttpClient if provided; if not, fall back to fetch()
-  
+  // Attempt to inject HttpClient if provided; if not, fall back to fetch()
+
   private httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
 
-  
+
   private apiBase = 'https://dummyjson.com/products';
   private apiAddProduct = 'https://dummyjson.com/products/add';
-  
+
 
   constructor() { }
 
@@ -150,5 +150,7 @@ export class Productdummyservice {
       );
     }
   }
+
+ 
 }
 

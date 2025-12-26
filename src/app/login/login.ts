@@ -14,7 +14,10 @@ import { Authentication } from '../services/authentication';
   styleUrl: './login.css',
 })
 export class Login {
+    isErrorMessage = false;
 private _isuserLoggedIn: boolean = false;
+  message: string = '';
+  alertType: 'success' | 'error' | 'info' | '' = '';
 
   //constructor(private _routerLink: Router,private authService: Authentication) { };
   //constructor(private _routerLink: Router) { };
@@ -23,34 +26,51 @@ private _isuserLoggedIn: boolean = false;
 
       private authService = inject(Authentication);
       private router = inject(Router);
-      
-  Login(_loginForm: NgForm): void {
+
+  //   LoginwithhardcodeToken(_loginForm: NgForm): void {
+  //   if (_loginForm.valid) {
+  //     console.log('Valid Form');
+  //     console.log('User Role:', _loginForm.value.role);
+  //     this.authService.userlogin('ake-jwt-token', _loginForm.value.role);
+  //     this.router.navigate(['/home/dashboard']);
+    
+  //   } else {
+  //     console.log('Invalid Form');
+  //   }
+  // }
+    LoginWithDummayAPIToken(_loginForm: NgForm): void {
     if (_loginForm.valid) {
       console.log('Valid Form');
       console.log('User Role:', _loginForm.value.role);
-      this.authService.userlogin('ake-jwt-token', _loginForm.value.role);
-      this.router.navigate(['/home/dashboard']);
-
-      // this.authService.userlogintokenid(_loginForm.value)?.subscribe(
-      // (response) => {
-      //   console.log("API Response:", response);
-      //   if (response.accessToken) {
-      //     localStorage.setItem('user', JSON.stringify(response));
-      //     localStorage.setItem('authToken', response.accessToken);
-      //     console.log("Token stored in localStorage:", response.accessToken);
-      //      this._routerLink.navigate(['/home']);
-      //   }
-      // },
-      // (error: HttpErrorResponse) => {
-      //   console.error("Login error:", error);
-      //   this._isuserLoggedIn = false;
-      // }
-    //);
+      this.authService.userlogintokenid(_loginForm.value)?.subscribe(
+      (response) => {
+        console.log("API Response:", response);
+        if (response.accessToken) {
+          //localStorage.setItem('user', JSON.stringify(response));
+          localStorage.setItem('accessToken', response.accessToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
+          console.log("Access Token stored in localStorage:", response.accessToken);
+          console.log("Refresh Token stored in localStorage:", response.refreshToken);
+          this.router.navigate(['/home/dashboard']);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        console.error("Login error:", error);
+        this.isErrorMessage = true;
+        this.alertType= 'error';
+        this.message = "Error!:-Username or Password is incorrect.";
+        
+      }
+    );
     } else {
       console.log('Invalid Form');
     }
   }
 }
+
+    
+      
+
 
 //if (_loginForm.value.username == "admin" && _loginForm.value.password == "admin") {
       //console.log("Valid Form");

@@ -25,10 +25,10 @@ export class Home implements OnInit {
   }
 
 
-  LogOut(): void {
+  UserTokenBasedLogout(): void {
     //alert("Logout Clicked");
     console.log("Logout Clicked");
-    this.authService.userlogout();
+    this.authService.UserTokenBasedLogout();
     this.router.navigate(['/login']);
 
   }

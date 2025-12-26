@@ -9,9 +9,10 @@ import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } fro
 export class Authentication {
   private _isuserLoggedIn: boolean = false;
   private base = 'https://dummyjson.com';
-  private tokenKey = 'auth_access_token';
-  private refreshKey = 'auth_refresh_token';
+  private tokenKey = 'accessToken';
+  private refreshKey = 'refreshToken';
   private userKey = 'auth_user';
+  private userRoleKey = 'auth_user_role';
 
   // optional HttpClient (won't throw if provider missing)
   private httpClientRequest: HttpClient | null = inject(HttpClient, { optional: true } as any);
@@ -61,6 +62,9 @@ export class Authentication {
       password: loginUser.password,
       expiresInMins: 30
     };
+    this.setUser(loginUser.role);
+    this.isAuthenticatedSignal.set(true);
+    console.log("Called =>  Authentication service =>userlogin=>Value of isAuthenticatedSignal :", this.isAuthenticatedSignal());
     console.log("Authentication Service Call=>Data Request:", loginData);
 
     return this.httpClientRequest.post<any>(url, loginData, {
@@ -150,16 +154,16 @@ export class Authentication {
   // example: call this when login response arrives to persist user + role
   private setUser(user: IUser) {
     if (this.storageAvailable()) {
-      window.localStorage.setItem(this.userKey, JSON.stringify(user));
+      window.localStorage.setItem(this.userRoleKey, JSON.stringify(user));
     }
   }
 
   // return stored user object if available
   getUser(): any | null {
-    if (!this.storageAvailable()) return null;
-    const raw = window.localStorage.getItem(this.userKey);
-    if (!raw) return null;
-    try { return JSON.parse(raw); } catch { return null; }
+    //if (!this.storageAvailable()) return null;
+    const raw = window.localStorage.getItem('auth_user_role');
+    //if (!raw) return null;
+    //try { return JSON.parse(raw); } catch { return null; }
   }
   // check single role (supports string or array on user object)
   hasRole(role: string): boolean {
@@ -190,7 +194,7 @@ export class Authentication {
     }
   }
 
-  logout(): void {
+  UserTokenBasedLogout(): void {
     this.clearStorage();
     this.isAuthenticatedSignal.set(false);
   }
@@ -199,9 +203,11 @@ export class Authentication {
 
 
   private clearStorage() {
-    if (!this.storageAvailable()) return;
-    window.localStorage.removeItem(this.tokenKey);
-    window.localStorage.removeItem(this.refreshKey);
-    window.localStorage.removeItem(this.userKey);
+    //if (!this.storageAvailable()) return;
+    console.log("Called =>  Authentication service =>UserTokenBasedLogout=>Remove token");
+    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('refreshToken');
+    window.localStorage.removeItem('auth_user');
+    window.localStorage.removeItem('auth_user_role');
   }
 }

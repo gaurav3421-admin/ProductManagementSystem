@@ -19,7 +19,8 @@ export class Home implements OnInit {
 
   ngOnInit() {
 
-    this.userRole = this.authService.getUser();
+    //this.userRole = this.authService.getUser();
+    this.userRole = 'Admin';
     console.log("Home Component ngOnInit=> User Role from localStorage :", this.userRole);
 
   }

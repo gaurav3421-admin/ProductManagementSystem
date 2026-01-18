@@ -87,12 +87,7 @@
               <label for="semester" class="form-label">Semester</label>
               <select class="form-select" id="semester" required>
                 <option selected disabled value="">Choose...</option>
-                <option>1st Semester</option>
-                <option>2nd Semester</option>
-                <option>3rd Semester</option>
-                <option>4th Semester</option>
-                <option>5th Semester</option>
-                <option>6th Semester</option>
+                <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}</option>
               </select>
             </div>
           </div>

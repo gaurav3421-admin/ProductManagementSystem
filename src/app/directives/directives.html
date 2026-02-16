@@ -5,6 +5,7 @@
     </div>
     <div class="card-body p-4">
       <div  [ngClass]=" { 'isGreen':_addGreeClass }" >Data has been success inserted </div>
+      
       <div  [ngClass]=" { 'isRed':_errorClass}" [ngStyle]=" { 'font-size': _fontSize} "  >Data has not success inserted </div>
       <button class="btn btn-success px-4 me-2" type="buttton" (click)="show()">Show</button>
       <button class="btn btn-success px-4 me-2" type="buttton" (click)="hide()">Hode</button>

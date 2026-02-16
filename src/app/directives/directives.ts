@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms"; // step 1
 import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-directives',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule], // step 2
   templateUrl: './directives.html',
   styleUrl: './directives.css',
 })

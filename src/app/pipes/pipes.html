@@ -15,14 +15,19 @@
                                 <p>Uppercase: {{ name | uppercase}}</p>
                                 <p>Lowercase: {{ name | lowercase }}</p>
                                 <p>Titlecase: {{ name | titlecase }}</p>
+                                
                                 <p>Full Date: {{ today | date:'fullDate' }}</p>
                                 <p>Short Date: {{ today | date:'short' }}</p>
                                 <p>Time: {{ today | date:'shortTime' }}</p>
+
                                 <p>Price in INR: {{ price | currency:'INR' }}</p>
                                 <p>Price in USD: {{ price | currency:'USD' }}</p>
-                                <p>Decimal: {{ price | number:'1.2-3' }}</p>
+                                <p>Price in EUR: {{ price | currency:'EUR' }}</p>
+
+                                <p>Decimal: {{ price | number:'1.2-4' }}</p>
                                 <p>Percent: {{ percentValue | percent }}</p>
-                                <p>Slice (first 2 fruits): {{ fruits | slice:0:3 }}</p>
+
+                                <p>Slice (first 2 fruits): {{ fruits | slice:0:2 }}</p>
                                 <p>Student JSON: {{ student | json }}</p>
                                 <div *ngFor="let item of keyValueObject | keyvalue">
                                     {{ item.key }} : {{ item.value }}
@@ -37,6 +42,12 @@
                         </div>
 
                     </form>
+                      <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Custom Pipe </h5>
+                      <div>
+                        <h3>Temperature Conversion</h3>
+                        <p>68°F converted to Celsius is: {{ fahrenheitValue | tempConverter:'C' }}°C</p>
+                        <p>25°C converted to Fahrenheit is: {{ celsiusValue | tempConverter:'F' }}°F</p>
+                    </div>
 
                     <h5 class="mb-3 text-primary border-bottom pb-2">2️⃣ Custom Pipe </h5>
                     <form>

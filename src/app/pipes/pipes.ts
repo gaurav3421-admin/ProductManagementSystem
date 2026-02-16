@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // for using built-in pipes
+import { TempConverterPipe } from '../temp-converter-pipe'; // Import the custom pipe
 
 @Component({
   selector: 'app-pipes',
-  imports: [CommonModule],
+  imports: [CommonModule, TempConverterPipe], // Add the custom pipe here
   templateUrl: './pipes.html',
   styleUrl: './pipes.css',
 })
 export class Pipes {
+    // Custom Pipe Example
+  fahrenheitValue:number = 68; // 20°C
+  celsiusValue: number = 25; // 77°F
 
   name: string = "gaurav kumar";
   today: Date = new Date();

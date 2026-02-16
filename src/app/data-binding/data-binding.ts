@@ -13,11 +13,11 @@ export class DataBinding {
    _isDisabled:boolean=false
 
   employeeName:string=" Ajit Kumar ";
-
+  
 
   submitStudentInfo( studentName:string ):void {
     alert("Student Name: " + studentName);
-
+    
   }
 
   employeeInformation(xxxx:string ):void {

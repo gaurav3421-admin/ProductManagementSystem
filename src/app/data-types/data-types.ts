@@ -10,10 +10,19 @@ import { CommonModule } from '@angular/common'; // directives like ngIf, ngFor e
 })
 export class DataTypes {
 
+
+  // constructor
+  constructor() {} ;
+  
+   // Properties and Variables
   _studentName:string ="This is my first Angular App";
-  _studentAge:any=22;
-  _isEnrolled:boolean=true;
   _largeNumber: bigint = 9007199254740991n;
+  _age:number=35;
+  _isEnrolled:boolean=true;
+  
+  _studentAge:any=22;
+  
+  
 
   // Object
  student = {
@@ -28,6 +37,7 @@ export class DataTypes {
   //Array
   students: string[] = ["Gaurav", "Amit", "Rohan", "Sita"];
   marks: number[] = [85, 90, 78, 92];
+  
 
 
 
@@ -52,6 +62,11 @@ export class DataTypes {
     [2, "Sita"],
     [3, "Rohan"]
   ];
+
+  // Methods
+  getProduct() :void {
+     console.log ("Product details");
+  }
 
 
 }

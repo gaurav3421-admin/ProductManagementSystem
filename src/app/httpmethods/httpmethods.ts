@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
+import { AddProducthttpmethod } from '../add-producthttpmethod/add-producthttpmethod';  
+import { DeleteProducthttpmethod }  from '../delete-producthttpmethod/delete-producthttpmethod';
 
 @Component({
   selector: 'app-httpmethods',
-  imports: [],
+  imports: [AddProducthttpmethod, DeleteProducthttpmethod],
   templateUrl: './httpmethods.html',
-  styleUrl: './httpmethods.css',
+  styleUrls: ['./httpmethods.css']  ,
 })
 export class Httpmethods {
+
+  
 
 }

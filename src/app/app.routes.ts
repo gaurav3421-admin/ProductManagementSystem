@@ -20,6 +20,7 @@ import { Aggridexample } from '../app/aggridexample/aggridexample';
 import { AdvanceTopics } from '../app/advance-topics/advance-topics';
 import { ParentComponentProductList } from '../app/parent-component-product-list/parent-component-product-list';
 import { ComponentLifecycleHooks } from '../app/component-lifecycle-hooks/component-lifecycle-hooks'
+import { Httpmethods   } from '../app/httpmethods/httpmethods';
 import { ErrorPage } from '../app/error-page/error-page';
 import { authGuard, authChildGuard } from '../app/auth-guard';
 
@@ -61,7 +62,8 @@ export const routes: Routes =
                     { path: 'angularpipes', component: Pipes },
                     { path: 'advancedtopics', component: AdvanceTopics },
                     { path: 'InputAndOutputdecorator', component: ParentComponentProductList },
-                    { path: 'ComponentLifecycleHooks', component: ComponentLifecycleHooks }
+                    { path: 'ComponentLifecycleHooks', component: ComponentLifecycleHooks },
+                    { path: 'AngularHttpmethods', component: Httpmethods }
 
 
                     // Alternative lazy loading approach

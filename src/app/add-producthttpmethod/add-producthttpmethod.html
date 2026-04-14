@@ -1,0 +1,112 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h5>Add Product Details</h5>
+    </div>
+    <!-- Success Message Div -->
+    <div *ngIf="isProductAdded" class="alert  mt-3  p-1" [ngClass]="{
+       'alert-success': alertType === 'success',
+       'alert-danger': alertType === 'error',
+       'alert-info': alertType === 'info'
+     }" role="alert">
+        <p class="m-0 fw-bold">{{message}}</p>
+    </div>
+    <div class="card-body p-2">
+        <div class="container-fluid mt-1">
+            <div class="card p-4 shadow">
+
+                
+                <form #productForm="ngForm" (ngSubmit)="addProductDetails(productForm)">
+
+                    <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Basic Information</h5>
+
+                    <div class="row mb-3">
+                        <!-- ID (hidden/read-only) -->
+                        <input type="hidden" name="id" [(ngModel)]="product.id">
+
+                        <!-- Title -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                placeholder="Enter product title" [(ngModel)]="product.title" required minlength="3"
+                                #title="ngModel">
+                            <div class="text-danger small" *ngIf="title.invalid && (title.dirty || title.touched)">
+                                <div *ngIf="title.errors?.['required']">Title is required.</div>
+                                <div *ngIf="title.errors?.['minlength']">Title must be at least 3 characters.</div>
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Category <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="category" [(ngModel)]="product.category"
+                                required #category="ngModel">
+                            <div class="text-danger small"
+                                *ngIf="category.invalid && (category.dirty || category.touched)">Category is required.
+                            </div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Price (₹)</label>
+                            <input type="number" class="form-control" name="price" [(ngModel)]="product.price" min="0"
+                                step="0.01" #price="ngModel">
+                            <div class="text-danger small" *ngIf="price.invalid && (price.dirty || price.touched)">
+                                <div *ngIf="price.errors?.['min']">Price cannot be negative.</div>
+                            </div>
+                        </div>
+
+                        <!-- Image URL -->
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label">Image URL</label>
+                            <input type="url" class="form-control" name="image" [(ngModel)]="product.image"
+                                placeholder="https://..." #image="ngModel">
+                            <div class="text-muted small">Provide a direct image URL. Preview updates after blur.</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="3" name="description" [(ngModel)]="product.description"
+                                required minlength="10" #description="ngModel"></textarea>
+                            <div class="text-danger small"
+                                *ngIf="description.invalid && (description.dirty || description.touched)">
+                                <div *ngIf="description.errors?.['required']">Description is required.</div>
+                                <div *ngIf="description.errors?.['minlength']">Description must be 10 characters
+                                    minimum.</div>
+                            </div>
+                        </div>
+
+                        <!-- Rating.rate -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Rating (rate)</label>
+                            <input type="number" class="form-control" name="ratingRate"
+                                [(ngModel)]="product.rating.rate" min="0" max="5" step="0.1" #ratingRate="ngModel">
+                            <div class="text-muted small">0.0 - 5.0</div>
+                        </div>
+
+                        <!-- Rating.count -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Rating (count)</label>
+                            <input type="number" class="form-control" name="ratingCount"
+                                [(ngModel)]="product.rating.count" min="0" step="1" #ratingCount="ngModel">
+                            <div class="text-muted small">Number of ratings/reviews.</div>
+                        </div>
+
+                        <!-- Image preview -->
+                        <div class="col-12 mb-3" *ngIf="product.image">
+                            <label class="form-label">Image Preview</label>
+                            <div>
+                                <img [src]="product.image" alt="preview"
+                                    style="max-width:150px; max-height:150px; object-fit:cover; border-radius:4px;">
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12">
+                            <button class="btn btn-primary mt-3" [disabled]="!productForm.valid">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

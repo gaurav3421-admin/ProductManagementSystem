@@ -92,7 +92,7 @@ export class DeleteProductDetails {
       //console.log("Called updateProductDetails() method");
       console.log("Method=>deleteProductDetails()=> Product Id=" + this.searchText);
       var _productID: number = Number(this.searchText);
-      this._productdummyservice.deleteProduct(_productID ).subscribe(
+      this._productdummyservice.deleteProduct(_productID).subscribe(
         (response) => {
           console.log("Product deleted successfully:", response);
           //this.id = true;

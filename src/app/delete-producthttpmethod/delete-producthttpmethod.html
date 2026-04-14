@@ -3,7 +3,7 @@
         <h5>Delete Product Details</h5>
     </div>
     <!-- Success Message Div -->
-    <div *ngIf="isProductAdded" class="alert  mt-3  p-1" [ngClass]="{
+    <div *ngIf="isProductDeleted" class="alert  mt-3  p-1" [ngClass]="{
        'alert-success': alertType === 'success',
        'alert-danger': alertType === 'error',
        'alert-info': alertType === 'info'
@@ -80,12 +80,12 @@
                             </div>
 
 
-                            <div class="text-center mt-3">
+                            <!-- <div class="text-center mt-3">
                                 <button class="btn btn-danger" [disabled]="deletedProductForm.invalid || isLoading"
                                     type="submit" (click)="deleteProductDetails(deletedProductForm)">
                                     Delete Product Details
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </form>

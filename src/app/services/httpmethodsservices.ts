@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, of  } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';// Step 1 - Import HttpClient and HttpErrorResponse
 import { ProductItem } from '../interfaces/product';
+import { IProductDelete } from '../interfaces/Iproductdetails';
 
 
 @Injectable({
@@ -64,9 +65,9 @@ private apiURLSearchProduct = 'https://dummyjson.com/products/search';
 
 private apiURLDeleteProduct = 'https://dummyjson.com/products';
 //'https://dummyjson.com/products/1'
-  deleteProductDetails(productID: number): Observable<ProductItem | null> {
+  deleteProductDetails(productID: number): Observable<IProductDelete | null> {
     if (this._httpClientRequest) {
-      return this._httpClientRequest.delete<ProductItem>(`${this.apiURLDeleteProduct}/${productID}`);
+      return this._httpClientRequest.delete<IProductDelete>(`${this.apiURLDeleteProduct}/${productID}`);
     } else {
       return of(null);
     }

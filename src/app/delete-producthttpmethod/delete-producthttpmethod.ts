@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'; // teamplate-driven forms
 import { NgForm } from '@angular/forms'; // Import NgForm for template-driven forms
 import { ProductItem } from '../interfaces/product';
 import { Httpmethodsservices } from '../services/httpmethodsservices';
+import { IProductDelete } from '../interfaces/Iproductdetails';
 
 @Component({
   selector: 'app-delete-producthttpmethod',
@@ -17,7 +18,7 @@ export class DeleteProducthttpmethod {
   //product: any = null;
   isLoading = false;
   errorMessage = '';
-  isProductAdded = false;
+  isProductDeleted = false;
   message: string = '';
   alertType: 'success' | 'error' | 'info' | '' = '';
 
@@ -56,11 +57,12 @@ export class DeleteProducthttpmethod {
       if (deleteProductForm.valid){
           console.log("Deleting product with ID:", this.product.id);
             this.httpmethodsservices.deleteProductDetails(this.product.id).subscribe(
-                (response) => {
+                (response: IProductDelete | null) => {
                   console.log("Product deleted successfully:", response);
                   this.message = "Product deleted successfully.";
+                  this.isProductDeleted = true;
                   this.alertType = "success";
-                  //this.message = "Success!:-Product details have been deleted successfully. Product ID: " + response.isDeleted + " and product Title: " + response.deletedOn;
+                  this.message = "Success!:-Product details have been deleted successfully. Product ID:= " + response?.id + " and product Title:= " + response?.title + " and isDeleted := " + response?.isDeleted + " and deletedOn := " + response?.deletedOn;
                 },
                 (error) => {
                   console.error("Error deleting product:", error);

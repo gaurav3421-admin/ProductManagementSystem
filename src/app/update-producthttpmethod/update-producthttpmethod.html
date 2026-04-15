@@ -1,0 +1,96 @@
+<div class="card table-card">
+    <div class="card-header">
+        <h5>Update  Product Details</h5>
+    </div>
+    <!-- Success Message Div -->
+    <div *ngIf="isProductUpdated" class="alert  mt-3  p-1" [ngClass]="{
+       'alert-success': alertType === 'success',
+       'alert-danger': alertType === 'error',
+       'alert-info': alertType === 'info'
+     }" role="alert">
+        <p class="m-0 fw-bold">{{message}}</p>
+    </div>
+    <div class="card-body p-2">
+        <div class="container-fulid mt-1">
+            <div class="card p-4 shadow">
+                <form #updatedProductForm="ngForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-1 mb-3">
+                            <label for="productName" class="form-label">Product Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control" name="searchText"
+                                placeholder="Enter product name..." [(ngModel)]="searchText" required
+                                #productName="ngModel">
+                            <div *ngIf="updatedProductForm.controls['productName']?.invalid 
+                                && (updatedProductForm.controls['productName']?.touched || 
+                                updatedProductForm.controls['productName']?.dirty)"
+                                class="text-danger mb-1 alert alert-danger p-1">Enter product name.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button class="btn btn-primary" [disabled]="updatedProductForm.invalid || isLoading"
+                                type="submit" (click)="SearchProduct()">
+                                Search Product
+                            </button>
+                            &nbsp;&nbsp;
+                            <button class="btn btn-danger" [disabled]="updatedProductForm.invalid || isLoading"
+                                type="submit" (click)="updateProductDetails(updatedProductForm)">
+                                Update Product Details
+                            </button>
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Loader -->
+                    <div *ngIf="isLoading" class="text-primary ">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="card p-3 shadow-sm">
+
+                        <!-- Basic Information -->
+                        <h5 class="mb-3 text-primary border-bottom pb-2">1️⃣ Basic Information</h5>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label ">Title</label>
+                                <input type="text" class="form-control" name="title" [(ngModel)]="product.title">
+                            </div>
+
+
+
+                            <div class="mb-2">
+                                <label class="form-label ">Description</label>
+                                <textarea class="form-control" rows="2" name="description"
+                                    [(ngModel)]="product.description"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label ">Category</label>
+                                    <input type="text" class="form-control" [(ngModel)]="product.category"
+                                        name="category">
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- <div class="text-center mt-3">
+                                <button class="btn btn-danger" [disabled]="deletedProductForm.invalid || isLoading"
+                                    type="submit" (click)="deleteProductDetails(deletedProductForm)">
+                                    Delete Product Details
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

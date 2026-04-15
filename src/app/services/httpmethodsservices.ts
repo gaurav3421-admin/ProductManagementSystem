@@ -15,6 +15,9 @@ export class Httpmethodsservices {
 
   private apiURL = 'https://dummyjson.com/products'; // API base enpoint'
   private apiURLaddProduct = 'https://dummyjson.com/products/add';
+  private apiURLSearchProduct = 'https://dummyjson.com/products/search';
+  private apiURLDeleteProduct = 'https://dummyjson.com/products';
+  private apiURLUpdateProduct = 'https://dummyjson.com/products';
 
   private _httpClientRequest: HttpClient | null = inject(HttpClient); // Step 2 - Method 1- Inject HttpClient by inject
   private _productItem: Observable<ProductItem> | null = null;
@@ -52,7 +55,7 @@ export class Httpmethodsservices {
 
  }
 
-private apiURLSearchProduct = 'https://dummyjson.com/products/search';
+
 //'https://dummyjson.com/products/search?q=phone'
  searchProduct(searchText: string): Observable<ProductItem[]> {
 
@@ -63,7 +66,7 @@ private apiURLSearchProduct = 'https://dummyjson.com/products/search';
   }
 }
 
-private apiURLDeleteProduct = 'https://dummyjson.com/products';
+
 //'https://dummyjson.com/products/1'
   deleteProductDetails(productID: number): Observable<IProductDelete | null> {
     if (this._httpClientRequest) {
@@ -73,6 +76,15 @@ private apiURLDeleteProduct = 'https://dummyjson.com/products';
     }
   }
 
+  //'https://dummyjson.com/products/1'
+  //Updating a product will not update it into the server. It will simulate a PUT/PATCH request and will return updated product with modified data
+  updateProductDetails(productID: number, product: ProductItem): Observable<ProductItem | null> {
+    if (this._httpClientRequest) {
+      return this._httpClientRequest.put<ProductItem>(`${this.apiURLUpdateProduct}/${productID}`, product);
+    } else {
+      return of(null);
+    }
+  }
 
 //Method to get Country List
   getCountryList(): any {
